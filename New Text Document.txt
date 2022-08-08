@@ -1,0 +1,10 @@
+1: write a js program to search an element in an array
+2: write a javascript program to find all prime numbers from 1 – 100
+3: write a javascript to find first 10 prime numbers
+4: write a javascript to reverse array elements
+5: write a javascript function to get the number of days in a month
+6: write a javascript to convert celsius to fahrenheit
+7: write a javascript to convert fahrenheit to celsius
+8: write a javascript function to convert an amount to coins
+9: write a javascript function to find the repeated character in array
+10: write a program to calculate area of circle

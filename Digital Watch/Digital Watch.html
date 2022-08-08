@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Watch</title>
+
+  <style>
+      body{
+        min-height: 90vh;
+        display: flex;
+        background: linear-gradient(to right, lightblue , blueviolet);
+        align-items: center;
+        justify-content: center;
+      }
+      #clock{
+        padding: 10px 40px;
+        width: max-content;
+        height: max-content;
+        /* width: 480px; */
+        /* height: 100px; */
+        font-size: 80px;
+        color: white;
+        border-radius: 10px;
+        border: 5px solid white;
+        box-shadow: 10px 10px 0 0 blueviolet;
+        background-color: blueviolet;
+        /* transition: 0.6s; */
+      }
+      #clock:hover{
+        margin-left: 5px;
+        margin-top: 5px;
+        box-shadow: 0 0 0 0;
+        background-color: rgb(94, 23, 161);
+      }
+
+  </style>
+
+</head>
+<body>
+
+  <div id="clock"></div>
+  
+  <script>
+    var dot = ":"
+    
+    
+    function digitalClock(){
+      var date = new Date();
+      
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    if(hours > 12){
+        hours = hours - 12     
+      }
+    if(hours < "10"){
+        hours = "0" + hours
+      }
+      if(minutes < "10"){
+        minutes = "0" + minutes
+      }
+      if(seconds < "10"){
+        seconds = "0" + seconds
+      }
+      var pointout
+      if(hours > 12){
+        pointout = "AM"
+      }
+      else{
+        pointout = "PM"
+      }
+      
+      var time = hours + dot + minutes + dot + seconds;
+      document.getElementById("clock").innerText = time + " " + pointout;
+      
+      setInterval(function(){digitalClock();},1000)
+    }
+      digitalClock();
+
+      
+    
+  
+  
+
+  
+
+
+
+
+
+  // function digitalClock(){
+  //   var date = new Date()
+  
+  // console.log(date);
+  // var time = date.getTime()
+  // console.log(time);
+  // var hours = date.getHours()
+  // console.log(hours);
+  // var minutes = date.getMinutes()
+  // console.log(minutes);
+  // var seconds = date.getSeconds()
+  // console.log(seconds);
+  // }
+  // // digitalClock()
+  // setInterval(function(){
+  //   digitalClock()
+  // },1000)
+
+  
+
+
+
+
+    
+  </script>
+
+
+  
+</body>
+</html>

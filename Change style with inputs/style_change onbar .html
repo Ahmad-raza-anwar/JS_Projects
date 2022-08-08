@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playing with style</title>
+
+
+    <style>
+
+      *{
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body{
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container{
+        width: 100%;
+        height: 100vh;
+        background-color: burlywood;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+      }
+      .heading{
+        width: 80%;
+        height: max-content;
+        /* background-color: chartreuse; */
+        font-size: 80px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+      }
+      .text{
+        width: 80%;
+        height: max-content;
+        /* background-color: chartreuse; */
+        font-size: 50px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+      }
+      .image{
+        width: 700px;
+        height: 500px;
+        background-color: black;
+        padding: 10px;
+        overflow: hidden;
+      }
+      .image img{
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+
+</head>
+<body>
+
+
+
+  <div class="container">
+      <div class="heading">Update CSS Variables with <span style="color: black;">JS</span> </div>
+      <div class="text">
+        Spacing: <input type="range" id="range" value="10" min="0" max="100">
+        Blur: <input type="range" id="range" value="0" min="0" max="50">
+        rotate: <input id="range" type="range" value="0" min="0" max="100">
+        scale: <input id="range" type="range" min="0" value="0" max="100">
+        Base Color: <input class="color" type="color">
+
+      </div>
+      <div class="image">
+          <img src="./photo-1465188162913-8fb5709d6d57.jfif" alt="">
+      </div>
+  </div>
+    
+
+
+
+  <script>
+
+    var ranges = document.querySelectorAll("#range")
+    var image = document.querySelector(".image")
+    var img = document.querySelector(".image img")
+    var color = document.querySelector(".color")
+    var span = document.querySelector(".heading span")
+    console.log(ranges);
+
+    ranges[0].addEventListener('input', (e) => {
+      const value = e.target.value
+      image.style.padding = `${value}px`
+    })
+    ranges[1].addEventListener('input', (e) => {
+      const value = e.target.value
+      image.style.filter = `blur(${value}px)`
+    })
+    ranges[2].addEventListener('input', (e) => {
+      const value = e.target.value
+      image.style.transform = `rotate(${value}deg)`
+    })
+    ranges[3].addEventListener('input', (e) => {
+      const value = e.target.value
+      // image.style.transform = `scale(${value})`
+      img.style.transform = `scale(${value})`
+    })
+    color.addEventListener('input', (e) => {
+      const value = e.target.value
+      image.style.backgroundColor = value
+      span.style.color = value
+    })
+
+  </script>
+  
+</body>
+</html>

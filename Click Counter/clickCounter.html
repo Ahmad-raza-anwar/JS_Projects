@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input / Counter</title>
+
+
+  <style>
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+      div{
+        font-family: 'Courier New', Courier, monospace;
+        margin-top: 10vh;
+        color: darkmagenta;
+        font-size: 30px;
+        padding: 10px 80px;
+        border: 2px solid blueviolet;
+        background: linear-gradient(180deg , rgb(219, 219, 219), rgb(255, 255, 255));
+      }
+      button{
+        cursor: pointer;
+        border: none;
+        border-radius: 30px;
+        background-color: transparent;
+        font-size: 30px;
+        margin-top: 2vh;
+        border: 2px solid blueviolet;
+        color: blueviolet;
+        padding: 10px 80px;
+        transition: 0.5s;
+      }
+      button:hover{
+        color: white;
+        transform: scale(1.1);
+        background-color: blueviolet;
+      }
+  </style>
+
+
+</head>
+<body>
+  
+  <!-- <h1>Ask your question</h1>
+  <input type="text" placeholder="Ask a question">
+  -->
+  <div>Click On BUTTON</div>
+  <button>CLICK</button> 
+  <script>
+
+
+    var message = document.querySelector("div")
+    var btn = document.querySelector("button")
+    
+    
+    var i = 0
+
+    btn.addEventListener("click", function(){      
+      i++
+      message.innerHTML = "You Click the Button" + " " + i + " " + "times"
+    })
+
+
+
+
+
+
+
+
+
+      // var input = document.querySelector("input")
+      // var btn = document.querySelector("button")
+      // var message = document.querySelector("div")
+
+      // var arr = ["Maybe maybe not", "Probably not", "you can do it", "Nothing is impossible", "How to learn js"]
+
+      // btn.addEventListener("click", function(){
+      //   var answer = Math.floor(Math.random() * arr.length)
+
+      //   message.innerHTML = input.value + " " + arr[answer];
+      // input.value = ""
+      // })
+
+
+
+
+
+
+
+    // var input = document.querySelector("input")
+    // var btn = document.querySelector("button")
+    // var message = document.querySelector("div")
+
+    // var arr = ["Maybe maybe not", "Probably not", "you can do it", "Nothing is impossible", "How to learn js"]
+
+    // btn.addEventListener("click", function(){
+    //   let answer = Math.floor(Math.random() * arr.length)
+
+    //   message.innerHTML = input.value + " " + arr[answer]
+    //   input.value=""
+    // })
+
+
+
+  </script>
+</body>
+</html>

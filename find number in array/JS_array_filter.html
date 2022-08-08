@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>input Update</title>
+
+  <style>
+
+      body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        font-size: 33px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      #number{
+        font-size: 25px;
+        margin-top: 5vh;
+        border: 1px solid white;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        width: 400px;
+        height: 40px;
+      }
+
+      button{
+        font-size: 25px;
+        color: black;
+        background-color: white;
+        height: 40px;
+        width: 160px;
+        border: none;
+        cursor: pointer;
+        margin-top: 2vh;
+      }
+      
+
+
+
+  </style>
+
+
+</head>
+<body>
+
+
+      <input id="number" type="number" placeholder="   Enter a number">
+      
+      <button>Add Task</button>
+
+      
+
+
+      <script>
+
+       
+            var array = [
+                  {
+                    name: "Ahmad",
+                    age: "18",
+                    gender: "male"
+                  },
+                  {
+                    name: "Hassan",
+                    age: "18",
+                    gender: "Female"
+                  },
+                  {
+                    name: "Umer",
+                    age: "22",
+                    gender: "male"
+                  },
+                  {
+                    name: "Sir Zohaib",
+                    age: "22",
+                    gender: "male"
+                  },
+                  {
+                    name: "maryam",
+                    age: "500",
+                    gender: "Female"
+                  }
+                ];
+            
+          
+
+            console.log(array);
+            
+            const result = array.filter(check);
+            console.log(result);
+
+            function check(index) {
+              return index <= array[1]
+            }
+           
+                  
+                  
+                
+
+
+
+
+
+      </script>
+
+
+
+  
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+
+  <style>
+
+      body{
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #container{
+        width: 20%;
+        height: 50vh;
+        /* background-color: orchid; */
+      }
+      /* .operator{
+        padding: 25px 30px;
+      } */
+      .buttonClear{
+        padding: 15px 17px;
+      }
+      .equals{
+        padding: 15px 64px;
+      }
+      button{
+        cursor: pointer;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 30px;
+        padding: 15px 26px;
+        color: white;
+        border: 1px solid white;
+        background-color: rgb(112, 111, 111);
+      }
+      button:hover{
+        background-color: rgb(75, 74, 74);
+      }
+      #screen{
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 25px;
+        font-weight: bold;
+        /* border: 2px solid rgb(112, 111, 111); */
+      }
+      .display{
+        font-family: 'Courier New', Courier, monospace;
+        text-align: center;
+        padding: 15px 0;
+        /* margin-top: -10vh; */
+        border: 2px solid rgb(112, 111, 111);
+      }
+      #second{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      #sign{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      #answer{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      
+
+  </style>
+
+
+</head>
+<body>
+
+
+
+
+  <div id="container">
+    <div class="display">
+      <span id="screen">Sparta Calculator</span>
+      <span id="second"></span>
+      <span id="sign"></span>
+      <span id="answer"></span>
+    </div>
+    <button class="buttonNum">7</button>
+    <button class="buttonNum">8</button>
+    <button class="buttonNum">9</button>
+    <button class="operator">*</button>
+    <button class="buttonNum">4</button>
+    <button class="buttonNum">5</button>
+    <button class="buttonNum">6</button>
+    <button class="operator">/</button>
+    <button class="buttonNum">1</button>
+    <button class="buttonNum">2</button>
+    <button class="buttonNum">3</button>
+    <button class="operator">-</button>
+    <button class="buttonClear">AC</button>
+    <button class="equals">=</button>
+    <button class="operator">+</button>
+  </div>
+
+
+
+
+
+
+  <script>
+
+
+    var number1 = true
+    var number2 = false
+    var operator = false
+
+
+var number = document.getElementsByClassName("buttonNum");
+var op = document.getElementsByClassName("operator");
+var equal = document.getElementsByClassName("equals")[0];
+var clear = document.getElementsByClassName("buttonClear")[0];
+var screen = document.getElementById("screen");
+var second = document.getElementById("second");
+var sign = document.getElementById("sign");
+var answer = document.getElementById("answer");
+
+    console.log(number);
+
+
+
+    for(var i = 0; i < number.length ; i++){
+      number[i].addEventListener("click", function(e){
+        // console.log("fn is clicked");
+        if(number1 === true){
+      number1 = parseInt(e.target.innerHTML)
+      screen.innerHTML= e.target.innerHTML
+      operator=true
+    }else if(number2 === true){
+      number2 = parseInt(e.target.innerHTML)
+      sign.innerHTML= e.target.innerHTML
+    }
+    // console.log(number1,number2);
+    
+  })
+}
+
+for(var i = 0; i < op.length ; i++){
+  op[i].addEventListener("click", function(e){
+    // sign.innerHTML = "="
+    // console.log("fn is clicked");
+    if(operator === true){
+      operator = e.target.innerHTML
+      second.innerHTML= e.target.innerHTML
+      // operator=true
+      number2=true
+      
+    }
+    console.log(operator);
+    
+  })
+}
+
+
+equal.addEventListener("click", function(){
+  switch(operator){
+    case "+":
+      answer.innerText= "=" + (number1 + number2)
+      break;
+        case "-":
+        answer.innerText= "=" + (number1 - number2)
+        break;
+        case "*":
+        answer.innerHTML= "="   + number1 * number2
+        break;
+        case "/":
+        answer.innerText= "=" +  number1 / number2
+        break;
+        default :
+        screen.innerText="error"
+  }
+})
+
+
+
+clear.addEventListener("click", function(){
+  number1=true
+  number2=false
+  operator=false
+  screen.innerHTML="everything is clear "
+  second.innerHTML = ""
+  sign.innerHTML = ""
+  answer.innerHTML = ""
+})
+
+
+
+
+
+
+
+
+
+
+
+
+// var number1 = true;
+// var number2 = false;
+// var operator = false;
+
+// //getting elements
+// var number = document.getElementsByClassName("buttonNum");
+// var op = document.getElementsByClassName("operator");
+// var equal = document.getElementsByClassName("equals");
+// var clear = document.getElementsByClassName("buttonClear");
+// var screen = document.getElementById("screen");
+
+// //adding event listeners to buttons
+// for (var i = 0; i < number.length; i++) {
+//   number[i].addEventListener("click", function(event){
+//     screen.innerHTML = this.innerHTML;
+//     if(number1 === true){
+//       number1 = parseInt(this.innerHTML);
+//       operator = true;
+//     }else if(number2 === true){
+//       number2 = parseInt(this.innerHTML);
+//     }
+//   })
+// }
+
+// for (var i = 0; i < op.length; i++) {
+//   op[i].addEventListener("click", function(event){
+//     if(operator === true){
+//       screen.innerHTML = this.innerHTML;
+//       operator = this.innerHTML;
+//       number2 = true;
+//     }
+//   })
+// }
+
+// //equals button
+// equal[0].addEventListener("click", function(){
+//   var answer = doCalc();
+//   screen.innerHTML = answer;
+// })
+
+// //Calculations. ".toFixed(x)" converts number into a string while keeping x decimal places
+// function doCalc(){
+//   switch (operator) {
+//     case "+":
+//     return (number1 + number2).toFixed(2);
+//       break;
+//     case "-":
+//       return (number1 - number2).toFixed(2);
+//       break;
+//     case "/":
+//       return (number1 / number2).toFixed(2);
+//       break;
+//     case "*":
+//       return (number1 * number2).toFixed(2);
+//       break;
+//     default:
+//       return ("Error");
+//   }
+// }
+
+// //clear button
+// // clear[0].addEventListener("click", function(){
+// //   screen.innerHTML = "Sparta Calculator"
+// //   number1 = true;
+// //   number2 = false;
+// //   operator = false;
+// // })
+  </script>
+
+
+
+  
+</body>
+</html>

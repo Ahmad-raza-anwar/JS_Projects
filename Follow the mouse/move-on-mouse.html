@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+      <title>Move on mouse</title>
+
+      <style>
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  cursor: none;
+}
+h1{
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+}
+.main{
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(48, 48, 129);
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.fas{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: rgba(173, 216, 230, 0.753);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  transition: 0.1s;
+  filter: hue-rotate(100);
+}
+
+.four{
+  width: 300px;
+  height: 60px;
+  background-color: brown;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.one{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(173, 216, 230, 0.753);
+}
+.four .one:nth-child(2){
+  width: 40px;
+  height: 40px;
+}
+.four .one:nth-child(3){
+  width: 50px;
+  height: 50px;
+}
+.four .one:nth-child(4){
+  width: 60px;
+  height: 60px;
+}
+
+
+
+
+
+
+
+      </style>
+
+
+    </head>
+    <body>
+  
+      <div class="main">
+          <h1>Click & Draw</h1>
+          <div class="four">
+              <div class="one"></div>
+              <div class="one"></div>
+              <div class="one"></div>
+              <div class="one"></div>
+          </div>
+      </div>
+  
+      <script>
+
+
+        
+
+        const div = document.getElementsByClassName("main")[0]
+        var heading = document.querySelector(".main h1");
+        var one = document.querySelectorAll(".one");
+        
+        var move = document.createElement("div");
+        move.classList.add("fas");
+        div.append(move);
+        move.style.display = "none"
+
+        div.addEventListener("mousemove", function(e){
+
+          move.style.display = "block"
+
+          const x = e.clientX
+          const y = e.clientY
+          move.style.left = `${x + 5}px`
+          move.style.top = `${y - 20}px`
+          
+
+
+          one[0].addEventListener("click", function(){
+            move.style.width = "20px"
+            move.style.height = "20px"
+        })
+        one[1].addEventListener("click", function(){
+            move.style.width = "40px"
+            move.style.height = "40px"
+        })
+        one[2].addEventListener("click", function(){
+            move.style.width = "50px"
+            move.style.height = "50px"
+        })
+        one[3].addEventListener("click", function(){
+            move.style.width = "60px"
+            move.style.height = "60px"
+        })
+
+          heading.addEventListener("mouseenter", function(){
+            move.style.width = "100px"
+            move.style.height = "100px"
+            move.style.opacity = "0.3"
+          })
+          heading.addEventListener("mouseleave", function(){
+            move.style.width = "60px"
+            move.style.height = "60px"
+            move.style.opacity = "1"
+          })
+
+          // heading.addEventListener("click", function(e){
+            
+
+
+          // })
+
+          
+          
+          
+          
+        })
+
+        
+      </script>
+    </body>
+    </html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage</title>
+
+    <style>
+
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30vh;
+        flex-direction: column;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      span{
+        color: red;
+        font-weight: bold;
+      }
+
+    </style>
+
+
+</head>
+<body>
+
+  
+
+
+  
+    <div></div>
+    <span></span>
+
+
+
+
+  <script>
+
+    var div = document.querySelector("div");
+    var span = document.querySelector("span");
+
+    let totalNum = 80;
+    let StudentNum = Math.floor(Math.random() * totalNum);
+    console.log(StudentNum + "Student Numbers");
+    
+    
+    const result = (Num, random_min, totalNum, random_max, percent) => {
+      return (Num - random_min) * (percent - random_min) / (totalNum - random_max) 
+    }
+
+    
+    console.log(result(StudentNum, 0, 80, 0, 100) + "Percentage");
+  
+    div.innerHTML = `<h2>Student Gain (${StudentNum}) numbers outoff (${totalNum}) </h2>`;
+    span.innerHTML = `The Percentage is (${result(StudentNum, 0, 80, 0, 100)}%)`;
+
+    </script>
+
+  
+</body>
+</html>

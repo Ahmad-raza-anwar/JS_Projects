@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <style>
+     
+     *{
+       padding: 0;
+       margin: 0;
+     }
+     body{
+       overflow-x: hidden;
+     }
+     .list{
+       width: 200px;
+       height: 50px;
+       /* background-color: blue; */
+       position: absolute;
+       right: 50px;
+       top: 10px;
+       color: black;
+       font-size: 30px;
+
+     }
+    
+
+    
+    
+       
+       
+       
+       /* ------------------------------------------------- Collection ----------------------------------- */
+
+
+
+
+
+ .collection_main{
+   width: 80%;
+   height: max-content;
+   /* background-color: burlywood;  */
+   margin: 5vh auto;
+   display: flex;
+   justify-content: space-evenly;
+   flex-direction: column;
+   align-items: center;
+ }
+ .collection_text{
+   width: 400px;
+   height: 130px;
+   /* background-color: cadetblue; */
+   position: relative;
+ }
+ .collection_text img{
+   width: 100px;
+   height: 100px;
+   opacity: 0.2;
+   position: absolute;
+   top: 0;
+   left: 40%;
+   right: 40%;
+  }
+  .collection_text p{
+    color: rgb(112,27,99);
+    text-align: center;
+    margin-top: 2vh;
+    letter-spacing: 5px;
+  }
+  .collection_text h2{
+    color: rgb(32, 32, 32);
+    font-size: 45px;
+    text-align: center;
+    margin-top: 1vh;
+  }
+  
+  .collection{
+    width: 100%;
+    height: max-content;
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .collection_navbar{
+    width: 700px;
+    height: max-content;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .collection_navbar span{
+    padding: 10px 18px;
+    background-color: transparent;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  .border-active{
+    border: 2px dashed rgb(112,27,99);
+  }
+  
+  .collection_list{
+    width: 100%;
+    height: max-content;
+    /* background-color: coral; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .ALL{
+    width: 250px;
+    height: 300px;
+    background-color: rgb(255,216,104);
+    position: relative;
+    overflow: hidden;
+    display: none;
+    transition: 1s ease-in;
+    transform: scale(0);
+    margin-top: 50px;
+  }
+  .ALL p{
+    position: relative;
+    /* top: 97%; */
+  }
+  .ALL img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: 0.4s;
+  }
+  .ALL:hover img{
+    transform: scale(1.1);
+  }
+  .ALL_btn_1{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: white;
+    color: rgb(219, 219, 219);
+    display: flex;
+    font-size: 20px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .ALL:hover .ALL_btn_1{
+    /* margin-left: 0px; */
+    opacity: 1;
+  }
+
+  
+  .collection-active{
+    display: block;
+    transform: scale(1);
+  }
+  .collection-animate{
+    animation: slide 0.2s ease-in;
+  }
+  @keyframes slide {
+        0%{
+          transform: scale(0.7);
+        }
+        100%{
+          transform: scale(1);
+        }
+      }
+      
+      
+      
+      
+      
+  /* ------------------------------------------------- Right Side Bar -------------------------------- */
+
+
+  .right_sidebar{
+    width: 450px;
+    height: 100vh;
+    background-color: white;
+    z-index: 111111;
+    position: fixed;
+    right: -500px;
+    transition: 0.4s ease-out;
+    top: 0;
+    overflow-y: scroll;
+  }
+  .sidebar_back{
+    width: 100%;
+    height: 60px;
+    background-color: rgb(112,27,99);
+    display: flex;
+    align-items: center;
+    transition: 0.4s;
+    cursor: pointer;
+    position: relative;
+  }
+  .sidebar_back i{
+    position: absolute;
+    right: 20px;
+    color: rgb(255,216,104);
+    font-size: 25px;
+  }
+  .sidebar_back:hover{  
+    background-color: rgb(32, 32, 32);
+  }
+  .sidebar_back p{  
+    font-size: 20px;
+    color: rgb(255,216,104);
+    margin-left: 20px;
+    /* background-color: violet; */
+  }
+  .overlay{
+    width: 1535px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11111;
+    background-color: rgba(73, 71, 65, 0.76);
+    display: none;
+  }
+  .sidebar-inner-1{
+    width: 70%;
+    height: max-content;
+    margin: 5vh auto;
+    /* background-color: rosybrown; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cart_item{
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .subtotal{
+    width: 80%;
+    height: 300px;
+    /* background-color: sandybrown; */
+    margin: 5vh auto;
+  }
+  .subtotal p{
+    padding: 15px;
+  }
+  .subtotal img{
+    float : right;
+    
+  }
+  .subtotal p span{
+    float: right;
+  }
+  .subtotal button{
+    width: 80%;
+    height: 50px;
+    position: relative;
+    float : right;
+    right: 40px;
+    margin: 1vh auto;
+    background-color: rgb(32, 32, 32);
+    color: white;
+    font-size: 18px;
+    border: none;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .subtotal button:hover{
+    background-color: rgb(112,27,99);
+  }
+
+
+
+
+   </style>
+</head>
+<body>
+
+
+  <div class="overlay"></div>
+
+  <div class="right_sidebar">
+      <div class="sidebar_back">
+        <p class="back">Shopping Card</p>
+        <i class="fas fa-angle-right"></i>
+      </div>
+
+      <div class="sidebar-inner-1">
+      </div>
+
+
+      <div class="subtotal">
+        <button>VIEW CART</button>
+        <button>VIEW CHECKOUT</button>
+        <img src="./Add To Cart_images/paypal.webp" alt="">
+      </div>
+
+  </div>
+
+
+    <div class="list">
+      <i class="fas fa-shopping-bag"></i>
+    </div>
+
+   <div class="collection_main">
+
+      <div class="collection_text">
+          <p>BEST PRODUCT</p>
+          <h2>New Collection</h2>
+      </div>
+
+      <div class="collection">
+        <div class="collection_navbar">
+            <span class="border-active">ALL</span>
+            <span>NEW</span>
+            <span>SELLERS</span>
+            <span>FEATURED</span>
+            <span>SALE</span>
+        </div>
+        <div class="collection_list">
+            <div class="ALL FEATURED NEW collection-active">
+                <img src="./Add To Cart_images/1 (1).jfif" alt="">
+                <div class="ALL_btn_1">
+                  <i class="fas fa-cart-plus"></i>
+                </div>
+            </div>
+            <div class="ALL SELLERS SALE collection-active">
+                <img src="./Add To Cart_images/2 (1).jfif" alt="">
+                <div class="ALL_btn_1">
+                  <i class="fas fa-cart-plus"></i>
+                </div>
+            </div>
+            <div class="ALL SELLERS FEATURED collection-active">
+              <img src="./Add To Cart_images/5.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+            <div class="ALL NEW SELLERS collection-active">
+              <img src="./Add To Cart_images/3.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+            <div class="ALL FEATURED SALE collection-active">
+              <img src="./Add To Cart_images/4.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+            <div class="ALL NEW SALE collection-active">
+              <img src="./Add To Cart_images/6.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+            <div class="ALL FEATURED SELLERS collection-active">
+              <img src="./Add To Cart_images/7.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+            <div class="ALL NEW SALE collection-active">
+              <img src="./Add To Cart_images/8.jfif" alt="">
+              <div class="ALL_btn_1">
+                <i class="fas fa-cart-plus"></i>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+<script>
+//  Product List
+
+
+var all = document.querySelectorAll(".ALL")
+    console.log(all);
+    var spans = document.querySelectorAll(".collection_navbar span");
+    
+    spans.forEach(function(e){
+      e.addEventListener("click", function(){
+        removeBorder();
+        e.classList.add("border-active")
+      })
+    })
+    function removeBorder() {
+      spans.forEach(function(e){
+        e.classList.remove("border-active")
+      })
+    }
+
+    spans.forEach(function(e){
+      e.addEventListener("click", function(){
+          var text = e.innerHTML    
+          removeClass()
+          all.forEach(function(e){
+            if(e.classList.contains(text)){
+              e.classList.add("collection-active")
+              e.classList.add("collection-animate")
+            }
+          })  
+        })
+      })
+      function removeClass() {
+        all.forEach(function(e){  
+          e.classList.remove("collection-animate")
+          e.classList.remove("collection-active")
+        })
+      }
+
+
+
+
+
+// Right Sidebar
+
+var back = document.querySelector(".sidebar_back");
+          var right_sidebar = document.querySelector(".right_sidebar");
+          var overlay = document.querySelector(".overlay");
+          var bag = document.querySelector(".fa-shopping-bag");
+
+          bag.addEventListener("click", function(){
+            right_sidebar.style.right = "0px"
+            overlay.style.display = "block"
+          })
+          back.addEventListener("click", function(){
+            right_sidebar.style.right = "-500px"
+            overlay.style.display = "none"
+          })
+
+
+        
+// Add To Cart
+
+          var cart = document.querySelectorAll(".ALL_btn_1");
+          var inner = document.querySelector(".sidebar-inner-1");
+          console.log(cart);
+          
+          cart.forEach(function(e){
+            e.addEventListener("click", function(){
+              var image = document.createElement("img");
+              image.classList.add("cart_item")
+              inner.appendChild(image)
+              var child = e.parentNode.childNodes
+              let source = child[1];
+              console.log(source);
+              var ss = source.src
+              console.log(ss);
+              image.setAttribute("src", ss)
+            })
+          })
+
+
+</script>
+
+
+
+
+</body>
+</html>

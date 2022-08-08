@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Image blocks animation</title>
+   <style>
+      *{
+         padding: 0;
+         margin: 0;
+         font-family: 'Courier New', Courier, monospace;
+      }
+      section{
+         position: relative;
+         width: 100%;
+         height: 100vh;
+         overflow: hidden;
+         background: rgb(211, 210, 210);
+      }
+      h2{
+         position: relative;
+         color: #fff;
+         text-align: center;
+         line-height: 100vh;
+         font-size: 9rem;
+      }
+      .main{
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         left: 0;
+         top: 0;
+         display: flex;
+         flex-wrap: wrap;
+      }
+      .main .block{
+         position: relative;
+         width: 5vw;
+         height: 5vh;
+         display: block;
+         animation: pop 0.5s ease-in-out forwards;
+      }
+      .main .block:nth-child(even){
+         animation: pop 0.5s ease-in-out forwards;
+      }
+      .main .block:nth-child(7n+3){
+         animation: pop 1.5s ease-in-out forwards;
+      }
+      .main .block:nth-child(7n+7){
+         animation: pop 1s ease-in-out forwards;
+      }
+      @keyframes pop{
+         0%{
+            opacity: 0;
+            transform: scale(0) translateY(1000px);
+         }
+         50%{
+            opacity: 1;
+            background: url(https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg);
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+         }
+         100%{
+            opacity: 1;
+            transform: scale(1) translateY(0px);
+            background: url(https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg);
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+         }
+      }
+      .info{
+         width: 30%;
+         height: 40%;
+         top: 50%;
+         right: 0%;
+         transform: translateY(-50%);
+         z-index: 1111;
+         opacity: 0;
+         position: absolute;
+         animation: animate 2s forwards;
+         animation-delay: 20s;
+      }
+      @keyframes animate
+      {
+         0%{
+            opacity: 0;
+            right: 30%;
+         }
+         100%{
+            right: 5%;
+            opacity: 1;
+         }
+      }
+      .info  h1{
+         font-size: 3rem;
+         text-align: center;
+         margin: 5% 0;
+         color: white;
+      }
+      .info p{
+         font-weight: bold;
+         font-size: 1.5rem;
+         padding: 20px;
+         color: white;
+      }
+   </style>
+</head>
+<body>
+   <section>
+      <h2>Js animation</h2>
+      <div class="main">
+         <div class="block"></div>
+         <div class="info">
+            <h1>My Pet</h1>
+            <p>I have a LION his name is  he like to mog he likes to log. Suleq i am crushing with a guy named mushing he likes to blushing</p>
+         </div>
+      </div>
+   </section>
+
+   <script>
+
+      const main = document.getElementsByClassName('main')[0];
+      const block = document.getElementsByClassName('block');
+
+      console.log(main);
+      console.log(block);
+      for(var i = 1; i < 400; i++){
+         main.innerHTML += "<div class='block'></div>"
+         block[i].style.animationDelay = `${i * 0.05}s`;
+      }
+   </script>
+</body>
+</html>

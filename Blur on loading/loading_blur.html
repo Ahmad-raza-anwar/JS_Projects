@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading</title>
+
+  <style>
+
+      *{
+        padding: 0;
+        margin: 0;
+      }
+      .container{
+        width: 100%;
+        height: 100vh;
+        background-size: cover;
+        background-position: center center;
+        background-image: url(./photo-1465188162913-8fb5709d6d57.jfif);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: blur 6s linear;
+      }
+      @keyframes blur {
+        0%{filter: blur(4px);}
+        100%{filter: blur(0px);}
+      }
+      .loading{
+        width: max-content;
+        height: max-content;
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: opacity 6.5s linear forwards;
+      }
+      @keyframes opacity {
+        to{opacity: 0;}
+      }
+
+
+  </style>
+
+</head>
+<body>
+
+
+  <div class="container">
+  </div>
+  <div class="loading">0%</div>
+
+  
+
+  <script>
+
+    var loading = document.querySelector(".loading");
+    let count = 0;
+
+      function load() {
+        if(count === 100){
+          clearInterval(load())
+        }
+        else{
+          count++
+        }
+        loading.innerHTML = `${count}%`
+      }
+      setInterval(() => {
+        load()
+      }, 50);
+
+  </script>
+
+</body>
+</html>

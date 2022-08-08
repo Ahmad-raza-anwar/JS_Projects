@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tags</title>
+
+  <style>
+    
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+      height: 100vh;
+      background-color: darkolivegreen;
+    }
+    h1{
+      font-size: 70px;
+      color: white;
+    }
+    input{
+      width: 500px;
+      height: 40px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: 1px solid darkgoldenrod;
+    }
+    .tags_main{
+      width: 50%;
+      margin: 10vh auto;
+    }
+    span{
+      padding: 10px 15px;
+      font-size: 18px;
+      color: black;
+      border-radius: 20px;
+      background-color: white;
+    }
+    .active{
+      background-color: darkgoldenrod;
+      color: white;
+    }
+
+
+
+  </style>
+
+</head>
+<body>
+
+
+    <h1>Generate tags</h1>
+    <input type="text">
+    <div class="tags_main"></div>
+  
+
+  <script>
+
+      let input = document.querySelector("input");
+      let tags_main = document.querySelector(".tags_main");
+
+      // let array = [];
+      document.addEventListener("keyup", function(e){
+        // console.log(e, "e");
+
+        
+
+        let value = input.value;
+        if(value){
+          value = value.split(",");
+          console.log(value);
+          tags_main.innerHTML = "";
+          value = value.filter(val => val.trim())
+          value.forEach(e => {
+            let span = document.createElement("span");
+            span.innerHTML = e;
+            tags_main.appendChild(span);
+          });
+          
+          if(e.key == "Enter"){
+            setInterval(() => {
+              for (let i = 0; i < value.length; i++) {
+              randomColor();
+            }
+            }, 400);
+          }
+
+        }
+      })
+
+
+      function randomColor() {
+        let spans = document.querySelectorAll("span");
+        let random = Math.floor(Math.random() * spans.length)
+        spans[random].classList.add("active");
+        setTimeout(() => {
+          spans[random].classList.remove("active");
+        }, 100);  
+      }
+
+
+  </script>
+
+</body>
+</html>

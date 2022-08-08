@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Age</title>
+</head>
+<body>
+
+
+      <h3 class="message">To Find your age <br>Enter Your Date of Birth in this Form (22-03-2021)</h3>
+      <input type="text" placeholder="  Enter">
+      <button type="button"></button>
+
+
+
+
+      <script>
+
+          var message = document.querySelector(".message");
+          var text = document.querySelector("input");
+          var btn = document.querySelector("button");
+          
+          var start = false
+          btn.innerHTML = "GET";
+        
+            btn.addEventListener("click", function(){
+              
+              var start = true
+              var str;
+              str = `${text.value}`      
+              let arr = str.split("-");
+              console.log(arr);
+
+              var age = 2021 - arr[2];
+              console.log(age);
+              message.innerHTML = `Your Age is ${age} .` 
+
+            })  
+
+            
+
+
+      </script>
+
+  
+</body>
+</html>

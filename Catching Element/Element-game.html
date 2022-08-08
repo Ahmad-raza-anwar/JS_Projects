@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Element Game</title>
+
+
+  <style>
+
+
+      body{
+        font-family: 'Courier New', Courier, monospace;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      } 
+
+      .output{
+        background-color: aquamarine;
+        height: 550px;
+        width: 550px;
+        border: 10px solid black;
+        overflow: hidden;
+        cursor: grab;
+        /* position: relative; */
+      }
+
+      .box{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: flex;
+        align-items: center;
+        width: 100px; 
+        justify-content: center;
+        height: 100px;
+        border-radius: 15px;
+        border: 5px solid green;
+      }
+      .box_2{
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        display: flex;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 15px;
+        border: 5px solid red;
+      }
+      span {
+        font-size: 30px;
+        font-weight: bold;
+        color: blue;
+      }
+      .message{
+        font-size: 30px;
+      }
+      .image{
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+      }
+
+
+      
+      </style>
+
+
+</head>
+<body>
+  
+
+  <h1 style="color: blue;font-size: 40px;">Catching Element</h1>
+  <div class="message">X:
+    <span>0</span>
+    Y:
+    <span>0</span>
+    score:
+    <span>0</span>
+    seconds:
+    <span>0</span> 
+  </div>
+  <div class="output"></div>
+  
+  
+  
+  
+  <script>
+    
+    const output = document.querySelector(".output");
+    const messageOut = document.querySelectorAll(".message span");
+    
+    let score = 0;
+    output.addEventListener("mouseenter", function(){
+      output.style.backgroundColor = "lightblue";
+    })
+    output.addEventListener("mouseleave", function(){
+      output.style.backgroundColor = "white";
+    })
+    output.addEventListener("mousemove", function(e){
+      messageOut[0].innerText = e.x;
+      messageOut[1].innerText = e.y;
+    })   
+    document.addEventListener("DOMContentLoaded", function(){
+      let div = document.createElement("div")
+      div.classList.add("box");
+        // div.innerHTML = "CLICK"
+        div.style.color = "green"
+        div.style.fontWeight = "bold"
+        div.style.fontSize = "25px"
+        div.style.textAlign = "center"
+      output.appendChild(div);
+      div.x = div.offsetLeft;
+      div.y = div.offsetTop;
+      div.tempColor = "#" + Math.random().toString(16).substr(-6);
+      div.style.backgroundColor = div.tempColor;
+      
+      div.addEventListener("mousemove", function(e){
+        div.style.backgroundColor = "red";
+      })
+      
+      div.addEventListener("mouseleave", function(e){
+        div.style.backgroundColor = div.tempColor;
+      })
+        var image = document.createElement("img");
+
+          image.setAttribute("class" , "image")
+          image.setAttribute("src" , "image-1.html")
+          div.appendChild(image); 
+      div.addEventListener("click", function(e){
+
+        div.tempColor = "#" + Math.random().toString(16).substr(-6);
+        div.style.backgroundColor = div.tempColor;
+        score++
+        messageOut[2].innerText = score;
+        
+          var arr = ["image-1.html" , "image-2.html" , "image-3.html", "image-4.png", "image-5.png", "image-6.png"]
+          image.setAttribute("class" , "image")
+          image.setAttribute("src" , arr[Math.floor(Math.random() * 6)])
+          div.appendChild(image); 
+      })
+      
+      div.steps = Math.random() * 20;
+      div.direction = Math.floor(Math.random() * 4);
+      window.requestAnimationFrame(move);
+    })
+    
+    
+    
+    function move(){
+      let speed = Math.random() * 15 + 10 ;
+      const box = document.querySelector(".box");
+      let bounds = output.getBoundingClientRect();
+      box.steps--;
+      if(box.steps < 0){
+        box.direction = Math.floor(Math.random() * 4);
+        box.steps = Math.random() * 20;
+      }
+      if(box.direction == 0 && box.x < bounds.right - 130){
+        box.x += speed;
+      }
+      if(box.direction == 1 && box.x > bounds.left){
+        box.x -= speed;
+      }
+      if(box.direction == 2 && box.y < bounds.bottom - 130){
+          box.y += speed;
+        }
+        if(box.direction == 3 && box.y > bounds.top){
+          box.y -= speed;
+        }
+        box.style.top = box.y + "px";
+        box.style.left = box.x + "px";
+
+      window.requestAnimationFrame(move);
+
+    }
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function(){
+        let div = document.createElement("div")
+        div.classList.add("box_2");
+        output.appendChild(div);
+        div.x = div.offsetLeft;
+        div.y = div.offsetTop;
+        div.tempColor = "#" + Math.random().toString(16).substr(-6);
+        div.style.backgroundColor = div.tempColor;
+        
+        div.addEventListener("mousemove", function(e){
+          div.style.backgroundColor = "red";
+
+        })
+        
+        div.addEventListener("mouseleave", function(e){
+          div.style.backgroundColor = div.tempColor;
+        })
+        var image = document.createElement("img");
+
+          image.setAttribute("class" , "image")
+          image.setAttribute("src" , "image-3.html")
+          div.appendChild(image); 
+        div.addEventListener("click", function(){
+          var arr = ["image-1.html" , "image-2.html" , "image-3.html", "image-4.png", "image-5.png", "image-6.png"]
+          
+          image.setAttribute("class" , "image")
+          image.setAttribute("src" , arr[Math.floor(Math.random() * 6)])
+          div.appendChild(image); 
+          
+
+          // div.style.backgroundImage = "URL{arr[Math.floor(Math.random() * 7)]}"
+            
+          // div.tempColor = "#" + Math.random().toString(16).substr(-6);
+        // div.style.backgroundColor = div.tempColor;
+        score--
+        messageOut[2].innerText = score;
+      })
+      div.steps = Math.random() * 20;
+      div.direction = Math.floor(Math.random() * 4);
+      window.requestAnimationFrame(move_2);
+      })
+
+      function move_2(){
+        let speed = Math.random() * 15 + 10;
+        const box_2 = document.querySelector(".box_2");
+        let bounds = output.getBoundingClientRect();
+        box_2.style.color = "red" 
+        box_2.style.fontWeight = "bold"
+        box_2.style.fontSize = "25px"
+        box_2.style.textAlign = "center"
+        
+        box_2.steps--;
+        if(box_2.steps < 0){
+          box_2.direction = Math.floor(Math.random() * 4);
+          box_2.steps = Math.random() * 20;
+        }
+        if(box_2.direction == 0 && box_2.x < bounds.right - 130){
+          box_2.x += speed;
+        }
+        if(box_2.direction == 1 && box_2.x > bounds.left){
+          box_2.x -= speed;
+        }
+        if(box_2.direction == 2 && box_2.y < bounds.bottom - 330){
+          box_2.y += speed;
+        }
+        if(box_2.direction == 3 && box_2.y > bounds.top){
+          box_2.y -= speed;
+        }
+        box_2.style.top = box_2.y + "px";
+        box_2.style.left = box_2.x + "px";
+        
+        window.requestAnimationFrame(move_2);
+        
+    }
+    
+
+    var date;
+    var sec;
+    function get(){
+      date = new Date();
+      sec = date.getSeconds();
+      var second = sec - sec
+      messageOut[3].innerHTML = second;
+      function get_2(){
+        date = new Date();
+        s = date.getSeconds();
+        var seconds = s - sec
+        console.log(seconds);
+        if(seconds < 0){
+          messageOut[3].innerHTML = seconds + 60;
+        }
+        else{
+          messageOut[3].innerHTML = seconds;
+          }
+          
+      }
+      
+      get_2() 
+      setInterval(function(){get_2()}, 1000)
+      console.log(second);
+    }
+    get() 
+
+
+
+
+
+    
+
+  </script>
+
+
+
+  
+</body>
+</html>

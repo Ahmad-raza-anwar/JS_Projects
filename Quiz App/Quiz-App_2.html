@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App_2</title>
+
+    <style>
+
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap'); */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(250, 218, 218);
+  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 100%);
+  font-family: 'Poppins', sans-serif;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* height: 100vh; */
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.quiz-container {
+  background-color: rgb(144, 184, 178);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+  width: 100%;
+  overflow: hidden;
+}
+
+.quiz-header {
+  padding: 0.2rem 2rem;
+  /* background-color: gray; */
+}
+
+h2 {
+  padding: 0.5rem;
+  /* text-align: center; */
+  margin: 0;
+  font-size: 1.3rem;
+  /* background-color: white; */
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  /* background-color: rgb(219, 219, 219); */
+}
+
+ul li {
+  /* background-color: darkgreen; */
+  /* margin-left: 40px; */
+  font-size: 1rem;
+  display: inline-block;
+  margin: 1rem 2rem;
+}
+
+ul li label {
+  cursor: pointer;
+}
+
+button {
+  background-color: #8e44ad;
+  color: #fff;
+  border: none;
+  display: block;
+  width: 20%;
+  margin: auto;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-family: inherit;
+  padding: 1rem;
+}
+
+button:hover {
+  background-color: #732d91;
+}
+
+button:focus {
+  outline: none;
+  background-color: #5e3370;
+}
+
+    </style>
+
+
+  </head>
+  <body>
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer" id="a" class="answer">
+            <label for="a" id="a_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="b" class="answer">
+            <label for="b" id="b_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="c" class="answer">
+            <label for="c" id="c_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer" id="d" class="answer">
+            <label for="d" id="d_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_1" id="e" class="answer">
+            <label for="e" id="e_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_1" id="f" class="answer">
+            <label for="f" id="f_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_1" id="g" class="answer">
+            <label for="g" id="g_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_1" id="h" class="answer">
+            <label for="h" id="h_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_2" id="i" class="answer">
+            <label for="i" id="i_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_2" id="j" class="answer">
+            <label for="j" id="j_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_2" id="k" class="answer">
+            <label for="k" id="k_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_2" id="l" class="answer">
+            <label for="l" id="l_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_3" id="m" class="answer">
+            <label for="m" id="m_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_3" id="n" class="answer">
+            <label for="n" id="n_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_3" id="o" class="answer">
+            <label for="o" id="o_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_3" id="p" class="answer">
+            <label for="p" id="p_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_4" id="q" class="answer">
+            <label for="q" id="q_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_4" id="r" class="answer">
+            <label for="r" id="r_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_4" id="s" class="answer">
+            <label for="s" id="s_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_4" id="t" class="answer">
+            <label for="t" id="t_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_5" id="u" class="answer">
+            <label for="u" id="u_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_5" id="v" class="answer">
+            <label for="v" id="v_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_5" id="w" class="answer">
+            <label for="w" id="w_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_5" id="x" class="answer">
+            <label for="x" id="x_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_6" id="a1" class="answer">
+            <label for="a1" id="a1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_6" id="b1" class="answer">
+            <label for="b1" id="b1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_6" id="c1" class="answer">
+            <label for="c1" id="c1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_6" id="d1" class="answer">
+            <label for="d1" id="d1_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_7" id="e1" class="answer">
+            <label for="e1" id="e1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_7" id="f1" class="answer">
+            <label for="f1" id="f1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_7" id="g1" class="answer">
+            <label for="g1" id="g1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_7" id="h1" class="answer">
+            <label for="h1" id="h1_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_8" id="i1" class="answer">
+            <label for="i1" id="i1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_8" id="j1" class="answer">
+            <label for="j1" id="j1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_8" id="k1" class="answer">
+            <label for="k1" id="k1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_8" id="l1" class="answer">
+            <label for="l1" id="l1_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      <div class="quiz-header">
+        <h2 id="question">Question text</h2>
+        <ul>
+          <li>
+            <input type="radio" name="answer_9" id="m1" class="answer">
+            <label for="m1" id="m1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_9" id="n1" class="answer">
+            <label for="n1" id="n1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_9" id="o1" class="answer">
+            <label for="o1" id="o1_text">Question</label>
+          </li>
+
+          <li>
+            <input type="radio" name="answer_9" id="p1" class="answer">
+            <label for="p1" id="p1_text">Question</label>
+          </li>
+        </ul>
+      </div>
+      
+
+      <button id="submit">Submit</button>
+    </div>
+
+
+
+<script>
+
+    const quizData = [
+[
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ]
+      
+],
+[
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ]
+      
+],
+[
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ]
+      
+],
+[
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ]
+      
+],
+[
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ],
+      [
+        "Hypertext Markup Language",
+        "Hypertext Markdown Language",
+        "Hyperloop Machine Language",
+        "Helicopters Terminals Motorboats Lamborginis",
+      ],
+      [
+        "1996",
+        "1995",
+        "1994",
+        "none of the above",
+      ],
+      [
+        "Java",
+        "C",
+        "Python",
+        "JavaScript",
+      ],
+      [
+        "Central Style Sheets",
+        "Cascading Style Sheets",
+        "Cascading Simple Sheets",
+        "Cars SUVs Sailboats",
+      ]
+      
+]
+
+];
+
+
+var Q_arr = [
+[
+  "1: &nbsp; Which language run in a web browser?",
+  "2: &nbsp; What does CSS stand for?",
+  "3: &nbsp; What does HTML stand for?",
+  "4: &nbsp; What year was JavaScript launched?",
+  "5: &nbsp; Which language run in a web browser?",
+  "6: &nbsp; What does CSS stand for?",
+  "7: &nbsp; What does HTML stand for?",
+  "8: &nbsp; What year was JavaScript launched?",
+  "9: &nbsp; Which language run in a web browser?",
+  "10: &nbsp; What does CSS stand for?"
+],
+[
+  "11: &nbsp; Which language run in a web browser?",
+  "12: &nbsp; What does CSS stand for?",
+  "13: &nbsp; What does HTML stand for?",
+  "14: &nbsp; What year was JavaScript launched?",
+  "15: &nbsp; Which language run in a web browser?",
+  "16: &nbsp; What does CSS stand for?",
+  "17: &nbsp; What does HTML stand for?",
+  "18: &nbsp; What year was JavaScript launched?",
+  "19: &nbsp; Which language run in a web browser?",
+  "20: &nbsp; What does CSS stand for?"
+],
+[
+  "21: &nbsp; Which language run in a web browser?",
+  "22: &nbsp; What does CSS stand for?",
+  "23: &nbsp; What does HTML stand for?",
+  "24: &nbsp; What year was JavaScript launched?",
+  "25: &nbsp; Which language run in a web browser?",
+  "26: &nbsp; What does CSS stand for?",
+  "27: &nbsp; What does HTML stand for?",
+  "28: &nbsp; What year was JavaScript launched?",
+  "29: &nbsp; Which language run in a web browser?",
+  "30: &nbsp; What does CSS stand for?"
+],
+[
+  "31: &nbsp; Which language run in a web browser?",
+  "32: &nbsp; What does CSS stand for?",
+  "33: &nbsp; What does HTML stand for?",
+  "34: &nbsp; What year was JavaScript launched?",
+  "35: &nbsp; Which language run in a web browser?",
+  "36: &nbsp; What does CSS stand for?",
+  "37: &nbsp; What does HTML stand for?",
+  "38: &nbsp; What year was JavaScript launched?",
+  "39: &nbsp; Which language run in a web browser?",
+  "40: &nbsp; What does CSS stand for?"
+],
+[
+  "41: &nbsp; Which language run in a web browser?",
+  "42: &nbsp; What does CSS stand for?",
+  "43: &nbsp; What does HTML stand for?",
+  "44: &nbsp; What year was JavaScript launched?",
+  "45: &nbsp; Which language run in a web browser?",
+  "46: &nbsp; What does CSS stand for?",
+  "47: &nbsp; What does HTML stand for?",
+  "48: &nbsp; What year was JavaScript launched?",
+  "49: &nbsp; Which language run in a web browser?",
+  "50: &nbsp; What does CSS stand for?"
+]
+
+]
+
+
+var ans = 
+[
+  [
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets"
+  ],
+  [
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets"
+  ],
+  [
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets"
+  ],
+  [
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets"
+  ],
+  [
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets",
+    "Hypertext Markup Language",
+    "1995",
+    "JavaScript",
+    "Cascading Style Sheets"
+  ]
+]
+
+// console.log(quizData[0].a);
+
+
+const questionEl = document.querySelectorAll('#question')
+const answerEls = document.querySelectorAll(".answer");
+const submitBtn = document.getElementById('submit')
+const labels = document.querySelectorAll("label");
+
+
+
+
+// let m=0;
+var l=0;
+let currentQuiz = 0
+let score = 0
+
+loadQuiz()
+
+function loadQuiz() {
+          var k=0;
+          deselectAnswers()
+          
+          const currentQuizData = quizData[currentQuiz]
+          
+          
+          console.log(currentQuizData);
+          
+          for(var i=0; i<currentQuizData.length; i++){
+            for(var j=0; j<4; j++){
+              labels[k].innerText = currentQuizData[i][j];
+                k++
+              }
+              
+          }
+          for(var m=-1; m<9;){
+                    for(var n=0; n<Q_arr[l].length; n++){
+                       m++
+                       questionEl[m].innerHTML = Q_arr[l][n]
+                        //  console.log(Q_arr[l][n]);
+                     }
+                    }
+                  }
+                  
+        
+        
+                  
+                  function deselectAnswers() {
+          answerEls.forEach(answerEl => answerEl.checked = false)
+        }
+        
+        function getSelected() {
+          let answer
+          
+          answerEls.forEach(answerEl => {
+            
+            if(answerEl.checked){              
+              // console.log("hello");
+              answer = answerEl.nextElementSibling.innerHTML
+              for(var i=0; i<labels.length; i++){
+                
+              if(answer === ans[0][i]){
+                  score++
+              }
+              else{
+                console.log("no");
+              }
+            }
+          }
+        })
+      }
+
+
+              //       if(answer){
+
+                //         if(questionEl.innerHTML === Q_arr[0][0]){
+                  //           if(answer === "JavaScript"){
+                    //             score++
+                    //           }
+                    //           else{
+        //             console.log("NO");
+        //           }
+        //       }
+        //       if(questionEl.innerHTML === Q_arr[0][1]){
+          //           if(answer === "Hypertext Markup Language"){
+            //             score++
+            //         }
+            //     }
+            //     if(questionEl.innerHTML === Q_arr[0][2]){
+              //               if(answer === "Cascading Style Sheets"){
+                //                 score++
+                //       }
+                //     }
+                //       if(questionEl.innerHTML === Q_arr[0][3]){
+                  //               if(answer === "1995"){
+                    //             score++
+        //           }
+        //     }
+        // }
+        
+        // if()
+        
+              
+        // return answer
+        
+        // console.log(answer);
+        
+            submitBtn.addEventListener('click', () => {
+              l++
+              getSelected();
+              // const answer = getSelected()
+            // m++ 
+            currentQuiz++
+            
+            if(currentQuiz < quizData.length){
+              loadQuiz()
+            }
+            else{
+              quiz.innerHTML = `<h2>You answerd ${score}/50 question correctly</h2>
+              <button onclick="location.reload()">Reload</button>
+              `
+            }
+          })
+          
+          
+          
+          
+          
+        
+          // const quiz = document.getElementById("quiz");
+          // const questionEl1 = document.getElementById('question1')
+          // const questionEl2 = document.getElementById('question2')
+          // const questionEl3 = document.getElementById('question3')
+          // const questionEl4 = document.getElementById('question4')
+          // const questionEl5 = document.getElementById('question5')
+          // const questionEl6 = document.getElementById('question6')
+          // const questionEl7 = document.getElementById('question7')
+      // const questionEl8 = document.getElementById('question8')
+      // const questionEl9 = document.getElementById('question9')
+
+
+        // let currentQuiz = 0 
+        // let score = 0
+
+        // loadQuiz()
+        
+        // function loadQuiz() {
+        //   deselectAnswers()
+
+        //   const currentQuizData = quizData[currentQuiz]
+
+        //   questionEl.innerHTML = currentQuizData.a.question
+        //   questionEl1.innerHTML = currentQuizData.b.question
+        //   questionEl2.innerHTML = currentQuizData.c.question
+        //   questionEl3.innerHTML = currentQuizData.d.question
+        //   questionEl4.innerHTML = currentQuizData.e.question
+        //   questionEl5.innerHTML = currentQuizData.f.question
+        //   questionEl6.innerHTML = currentQuizData.g.question
+        //   questionEl7.innerHTML = currentQuizData.h.question
+        //   questionEl8.innerHTML = currentQuizData.i.question
+        //   questionEl9.innerHTML = currentQuizData.j.question
+        //   a_text.innerHTML = currentQuizData.a.a
+        //   b_text.innerHTML = currentQuizData.a.b
+        //   c_text.innerHTML = currentQuizData.a.c
+        //   d_text.innerHTML = currentQuizData.a.d
+        //   e_text.innerHTML = currentQuizData.b.a
+        //   f_text.innerHTML = currentQuizData.b.b
+        //   g_text.innerHTML = currentQuizData.b.c
+        //   h_text.innerHTML = currentQuizData.b.d
+        //   i_text.innerHTML = currentQuizData.c.a
+        //   j_text.innerHTML = currentQuizData.c.b
+        //   k_text.innerHTML = currentQuizData.c.c
+        //   l_text.innerHTML = currentQuizData.c.d
+        //   m_text.innerHTML = currentQuizData.d.a
+        //   n_text.innerHTML = currentQuizData.d.b
+        //   o_text.innerHTML = currentQuizData.d.c
+        //   p_text.innerHTML = currentQuizData.d.d
+        //   q_text.innerHTML = currentQuizData.e.a
+        //   r_text.innerHTML = currentQuizData.e.b
+        //   s_text.innerHTML = currentQuizData.e.c
+        //   t_text.innerHTML = currentQuizData.e.d
+        //   u_text.innerHTML = currentQuizData.f.a
+        //   v_text.innerHTML = currentQuizData.f.b
+        //   w_text.innerHTML = currentQuizData.f.c
+        //   x_text.innerHTML = currentQuizData.f.d
+        //   a1_text.innerHTML = currentQuizData.g.a
+        //   b1_text.innerHTML = currentQuizData.g.b
+        //   c1_text.innerHTML = currentQuizData.g.c
+        //   d1_text.innerHTML = currentQuizData.g.d
+        //   e1_text.innerHTML = currentQuizData.h.a
+        //   f1_text.innerHTML = currentQuizData.h.b
+        //   g1_text.innerHTML = currentQuizData.h.c
+        //   h1_text.innerHTML = currentQuizData.h.d
+        //   i1_text.innerHTML = currentQuizData.i.a
+        //   j1_text.innerHTML = currentQuizData.i.b
+        //   k1_text.innerHTML = currentQuizData.i.c
+        //   l1_text.innerHTML = currentQuizData.i.d
+        //   m1_text.innerHTML = currentQuizData.j.a
+        //   n1_text.innerHTML = currentQuizData.j.b
+        //   o1_text.innerHTML = currentQuizData.j.c
+        //   p1_text.innerHTML = currentQuizData.j.d
+        // }
+
+
+
+
+
+
+          
+</script>
+
+
+    
+  </body>
+</html>

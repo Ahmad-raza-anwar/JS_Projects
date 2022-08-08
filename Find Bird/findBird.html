@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+
+
+  <style>
+
+        *{
+          padding: 0;
+          margin: 0;
+          font-family: 'Courier New', Courier, monospace;
+        }
+        body{
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          align-items: center;
+          flex-direction: column;
+          height: 100vh;
+        }
+        .container{
+          width: 50%;
+          height: 90%;
+          /* background-color: red; */
+          display: flex;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+          visibility: hidden;
+        }
+        .empty{
+          width: 200px;
+          height: 200px;
+          margin-top: 6px;
+          background-color: black;
+          border-radius: 10px;
+          position: relative;
+          /* overflow: hidden; */
+          transition: 0.6s;
+        }
+        .fill{
+          width: 100%;
+          height: 100%;
+          /* margin-top: 50px; */
+          background-color: black;
+          border-radius: 10px;
+          /* left: 100px; */
+          position: absolute;
+          background-size: cover;
+          background-image: url(./bird.png);
+          top: 0;
+          left: 0;
+          opacity: 0;
+          transition: 0.6s;
+        }
+        #message{
+          font-size: 25px;
+          font-weight: bold;
+        }
+        button{
+          padding: 5px 20px;
+          background-color: darkgoldenrod;
+          border: none;
+          color: white;
+          font-weight: bold;
+          border-radius: 5px;
+          font-size: 20px;
+        }
+
+  </style>
+
+
+</head>
+<body>
+      <div id="message">Find the IMAGE behind the black box...</div>
+      <button>Let's Start</button>
+      <div class="container">
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+      </div>
+      
+      
+      
+      <script>
+        
+        var main = document.querySelector(".container");
+        var empties = document.querySelectorAll(".empty");
+        var btn = document.querySelector("button");
+        var count = 1
+
+      
+        btn.addEventListener("click", function(){
+          main.style.visibility = "visible"
+          // console.log("Clicked");
+          var random = Math.floor(Math.random() * empties.length)
+          console.log(random);
+          var div = document.createElement("div");
+          div.classList.add("fill")
+          empties[random].append(div) 
+          
+          empties.forEach(function(e){
+            e.addEventListener("click", function(){
+              if(e != empties[random]){
+                console.log("No");
+                e.style.backgroundImage = "url(cross.png)";
+                e.style.backgroundSize = "cover";
+                e.style.transform = "rotateY(180deg)";
+                count++
+              }
+              else{
+                e.style.backgroundColor = "transparent";
+                div.style.opacity = 1;
+                var message;
+                message = "Congratulation!  You Find the Image in" + " " + count + "th" + " " + "Guesses";
+                alert(message)
+                e.style.transform = "rotateY(180deg)";
+                setTimeout(() => {
+                    location.reload()
+                }, 1000);
+              }
+            })
+          })
+
+
+        })
+
+
+
+
+    </script>
+
+
+
+  
+</body>
+</html>

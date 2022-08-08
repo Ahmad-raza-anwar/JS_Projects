@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the combow</title>
+
+
+  <style>
+
+
+    .numb{
+      width: 20px;
+      height: 20px;
+      font-size: 2em;
+    }
+        button{
+            margin-bottom: 15px;
+            margin-top:10px;
+        }
+        small{
+            font-size: 0.8em;
+            font-family: sans-serif;
+        }
+  </style>
+
+</head>
+<body>
+
+
+  <div class="message">Guess Combow</div>
+  <div class="game"></div>
+  <button type="button">Start</button>
+
+    <div>
+      <small>
+        Instructions: Guess the combo, blue means higher red means lower.  Try to solve it in as little guesses as possible.
+      </small>
+    </div>
+
+
+
+
+    <script>
+
+        var message = document.querySelector(".message")
+        var button = document.querySelector("button")
+        var gameArea = document.querySelector(".game")
+        let score = 0 ;
+        let gamePlay = false; 
+          
+        button.addEventListener("click", function(){
+          if(!gamePlay){
+            gamePlay = true;
+            score = 0;
+            gameArea.innerHTML = "";
+            message.innerHTML = "Guess The Combow"
+            button.innerHTML = "Check Combow";
+            maker(6)
+          }
+          else{
+            score++
+            message.innerHTML = "Guesses" + score;
+            const number = document.querySelectorAll(".numb")
+            let winCondition =0;
+            for(let i=0; i<number.length ; i++){
+              if(number[i].value == number[i].correct){
+                  number[i].style.backgroundColor = "green"
+                  number[i].style.color = "white"
+                  winCondition++
+                }
+                else if(number[i].value < number[i].correct){
+                  number[i].style.backgroundColor = "blue"
+                  number[i].style.color = "white"
+                }
+                else{
+                  number[i].style.backgroundColor = "red"
+                  number[i].style.color = "white"
+                }
+                if(winCondition == number.length){
+                  gameEND();
+                }
+              }
+            }
+          })
+          
+        function gameEND(){
+          gamePlay = false;
+          message.innerHTML = "You Guess the combow in" + score + "Guesses";
+          button.innerHTML = "Restart Game"
+        }
+        
+        function maker(num){
+          for(var x=0; x<num; x++){
+            var el = document.createElement("input");
+            el.setAttribute("type", "number");
+            el.max = 9;
+            el.min = 0;
+            // el.size = 1; 
+            el.style.fontSize = "0.8em";
+            el.classList.add("numb");
+            el.style.width = "50px";
+            el.correct = Math.floor(Math.random() * 10);
+            el.value = 0;
+            gameArea.appendChild(el);
+          }
+        }
+        
+        </script>
+
+
+
+</body>
+</html>

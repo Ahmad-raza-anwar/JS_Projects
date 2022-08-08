@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brick the ball</title>
+
+  <style>
+
+
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .output{
+      width: 100%;
+      height: 70px;
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+    }
+    .container{
+      width: 80%;
+      height: 90vh;
+      background-color: black;
+      position: relative;
+    }
+    .button{
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: red;
+      color: white;
+      font-size: 25px;
+    }
+    .gameArea{
+      width: 100%;
+      height: 93%;
+      position: relative;
+      /* background-color: violet; */
+    }
+
+    .enemy{
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .box {
+            position: absolute;
+            left: 40%;
+            bottom: 10%;
+            background-color: white;
+            width: 100px;
+            height: 20px;
+        }
+        
+        .ball {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: red;
+        }
+        
+        .hide {
+            display: none;
+        }
+    .alien {
+            position: absolute;
+            display: inline-block;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 50px;
+            padding: 5px;
+            color: white;
+            background-color: blue;
+            box-shadow: 0px 1px 8px 0px black;
+            font-size: 1em;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+
+
+  </style>
+
+</head>
+<body>
+
+
+  <div class="output">Score :<span class="score">0</span> <span class="position">Game Start</span></div>
+  <div class="container">
+    <div class="button">Start Game</div>
+    <div class="gameArea">
+        <div class="box"></div>
+        <div class="ball hide"></div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <script>
+
+
+        const btn= document.querySelector(".button");
+        const box = document.querySelector(".box");
+        const container = document.querySelector(".gameArea");
+        const fire = document.querySelector(".ball");
+        const score = document.querySelector(".score");
+        const boundArea = container.getBoundingClientRect();
+        const message = document.querySelector(".position");
+        btn.addEventListener("click", startGame);
+
+
+    
+        let player = {
+            score: 0
+            , speed: 5
+            , gameOver: true
+            , fire: false
+            , alienSpeed: 5
+        };
+
+    let keys = {};
+        document.addEventListener("keydown", function (e) {
+            let key = e.keyCode;
+            if (key === 37) {
+                keys.left = true;
+            }
+            else if (key === 39) {
+                keys.right = true;
+            }
+            else if (key === 38 || key === 32) {
+                if (!player.fire) {
+                    addShoot();
+                }
+            }
+        })
+        document.addEventListener("keyup", function (e) {
+            let key = e.keyCode;
+            if (key === 37) {
+                keys.left = false;
+            }
+            else if (key === 39) {
+                keys.right = false;
+            }
+        })
+
+        function gameOver() {
+            btn.style.display = "block";
+            btn.innerHTML = "Restart New Game";
+            player.fire = true;
+            fire.classList.add("hide");
+        }
+
+        function clearAliens() {
+            let tempAliens = document.querySelectorAll(".alien");
+            for (let x = 0; x < tempAliens.length; x++) {
+                tempAliens[x].parentNode.removeChild(tempAliens[x]);
+            }
+        }
+
+        function startGame() {
+            if (player.gameOver) {
+                clearAliens();
+                player.gameOver = false;
+                btn.style.display = "none";
+                player.alienSpeed = 12;
+                player.score = 0;
+                player.fire = false;
+                score.textContent = player.score;
+                setupAliens(20);
+                messageOutput("start game");
+                player.animFrame = requestAnimationFrame(update);
+            }
+        }
+
+        function setupAliens(num) {
+            let tempWidth = 70;
+            let lastCol = boundArea.width - tempWidth;
+            let row = {
+                x: boundArea.left + 50
+                , y: 50
+            }
+            for (let x = 0; x < num; x++) {
+                if (row.x > (lastCol - tempWidth)) {
+                    row.y += 120;
+                    row.x = boundArea.left + 50
+                }
+                alienMaker(row, tempWidth);
+                row.x += tempWidth + 20;
+            }
+        }
+
+
+        function alienMaker(row, tempWidth) {
+        
+            if(row.y > (boundArea.height - 200)){
+                return;
+            }
+            let div = document.createElement("div");
+            div.classList.add("alien");
+            let random = Math.random().toString(16).substr(-6);
+            div.style.backgroundColor = "#" + random;
+            let eye1 = document.createElement("span");
+            eye1.classList.add("eye");
+            eye1.style.left = "10px";
+            div.appendChild(eye1);
+            let eye2 = document.createElement("span");
+            eye2.classList.add("eye");
+            eye2.style.right = "10px";
+            div.appendChild(eye2);
+            let mouth = document.createElement("span");
+            mouth.classList.add("mouth");
+            div.appendChild(mouth);
+            div.style.width = tempWidth + "px";
+            div.xpos = Math.floor(row.x);
+            div.ypos = Math.floor(row.y);
+            div.style.left = div.xpos + "px";
+            div.style.top = div.ypos + "px";
+            div.directionMove = 1;
+            container.appendChild(div);
+        }
+
+        function addShoot() {
+            player.fire = true;
+            fire.classList.remove("hide");
+            fire.xpos = (box.offsetLeft + (box.offsetWidth / 2));
+            fire.ypos = box.offsetTop - 10;
+            fire.style.left = fire.xpos + "px";
+            fire.style.top = fire.ypos + "px";
+        }
+
+        function isCollide(a, b) {
+            let aRect = a.getBoundingClientRect();
+            let bRect = b.getBoundingClientRect();
+            return !(
+                (aRect.bottom < bRect.top) || (aRect.top > bRect.bottom) || (aRect.right < bRect.left) || (aRect.left > bRect.right))
+        }
+
+        function messageOutput(mes) {
+            message.innerHTML = mes;
+        }
+
+        function update() {
+            if (!player.gameOver) {
+                let tempAliens = document.querySelectorAll(".alien");
+                if (tempAliens.length == 0) {
+                    player.gameOver = true;
+                    messageOutput("You Won");
+                    gameOver();
+                }
+                for (let x = tempAliens.length - 1; x > -1; x--) {
+                    let el = tempAliens[x];
+                    if (isCollide(el, fire)) {
+                        messageOutput("HIT");
+                        player.alienSpeed++;
+                        player.score++;
+                        score.textContent = player.score;
+                        player.fire = false;
+                        fire.classList.add("hide");
+                        el.parentNode.removeChild(el);
+                        fire.ypos = boundArea.height + 100;
+                    }
+                    if (el.xpos > (boundArea.width - el.offsetWidth) || el.xpos < boundArea.left) {
+                        el.directionMove *= -1;
+                        el.ypos += 40;
+                        if (el.ypos > (box.offsetTop - 50)) {
+                            messageOutput("Game Over");
+                            player.gameOver = true;
+                            gameOver();
+                        }
+                    }
+                    el.xpos += (player.alienSpeed * el.directionMove);
+                    el.style.left = el.xpos + "px";
+                    el.style.top = el.ypos + "px";
+                }
+                let tempPos = box.offsetLeft;
+                if (player.fire) {
+                    if (fire.ypos > 0) {
+                        fire.ypos -= 15;
+                        fire.style.top = fire.ypos + "px";
+                    }
+                    else {
+                        player.fire = false;
+                        fire.classList.add("hide");
+                        fire.ypos = boundArea.height + 100;
+                    }
+                }
+                if (keys.left && tempPos > boundArea.left) {
+                    tempPos -= player.speed;
+                }
+                if (keys.right && (tempPos + box.offsetWidth) < boundArea.right) {
+                    tempPos += player.speed;
+                }
+                box.style.left = tempPos + "px";
+                player.animFrame = requestAnimationFrame(update);
+            }
+        }
+      // function makeEnimies () {
+      //   for(var i=0; i<10; i++){
+      //     let enemy = document.createElement("div");
+      //     enemy.classList.add("enemy");
+      //     gameArea.appendChild(enemy)
+      //     let random = Math.random().toString(16).substr(-6)
+      //     enemy.style.backgroundColor = "#" + random;
+      //     // collide(enemy, fire);
+      //   }
+
+      // }
+      
+      
+      // function collide (enemy, ball){
+
+      //   // console.log(enemy);
+      //   let arect = enemy.getBoundingClientRect()
+      //   let brect = ball.getBoundingClientRect()
+
+      //   return !(
+      //     (arect.bottom < brect.top) || (arect.top > brect.bottom) || (arect.right < brect.left) || (arect.left > brect.right)
+      //   )
+      // }
+
+      // function playGame() {
+      //   let box = document.querySelector(".box");
+      //   let area = gameArea.getBoundingClientRect();
+      //   if(player.start){
+          
+      //     if(keys.ArrowLeft && player.x > 0){
+      //       player.x -= player.speed 
+      //       console.log("left");
+      //     }
+      //     if(keys.ArrowRight && player.x < (area.width - 100)){
+      //       player.x += player.speed 
+      //       console.log("right");
+      //     }
+      //     box.style.left = player.x + "px"
+      //   }
+      //   window.requestAnimationFrame(playGame);
+      
+      // }
+      
+      // function makeballs() {
+      //   let box = document.querySelector(".box")
+      //     console.log("ArrowUp");
+      //     let ball = document.createElement("div");
+      //     ball.classList.add("ball")
+      //     box.appendChild(ball);
+      //       // player.y = ball.offsetLeft;  
+      //       // player.y -= player.speed;
+      //     let area = gameArea.getBoundingClientRect();
+      //     const y = (area.height + 100) * -1;
+      //     ball.style.top = y + "px"
+
+      //     check(ball);
+      //     // if(collide(enemy, ball)){
+      //     //   console.log("collide");
+      //     // }
+      //     // else{
+      //     //   console.log("Not");
+      //     // }
+      //   }
+        // function check(ball) {
+        //   let enemy = document.querySelectorAll(".enemy");
+        //   enemy.forEach(function(e){
+        //     if(collide(ball, e)){
+        //       console.log("hit");
+        //     }
+        //   })
+        // } 
+        
+        
+      // function keyOn (e) {
+      //   e.preventDefault();
+      //   keys[e.key] = true
+      // }
+      // function keyOff (e) {
+      //   e.preventDefault();
+      //   keys[e.key] = false
+      // }
+      
+      
+      
+      </script>
+  
+</body>
+</html>

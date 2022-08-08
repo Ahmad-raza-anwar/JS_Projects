@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun-Game</title>
+
+
+  <style>
+      body{
+        margin-top: 20vh;
+        height: 60vh;
+        display: flex;
+        font-family: 'Courier New', Courier, monospace;
+        flex-direction: column;
+        align-items: center;
+        /* animation: bgcolor 5s  infinite; */
+        justify-content: space-around;
+        background: linear-gradient(to right, rgb(204, 204, 204), white);
+      }
+      
+      #display{
+        color: rgb(26, 104, 248);
+        font-size: 30px;
+      }
+      #display span{
+        font-size: 40px;
+        color: black;
+        font-weight: bold;
+      }
+      #show{
+        width: 800px;
+        height: max-content;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0;
+        /* background-color: brown; */
+      }
+      .btn-1:hover{
+        background-color: rgb(26, 104, 248);
+      }
+      .btn-1{
+      opacity: 0;
+        cursor: pointer;
+        color: white;
+        display: inline-block;
+        border: none;
+        font-size: 20px;
+        border-radius: 30px;
+        background-color: rgb(87, 141, 240);
+        padding: 15px 60px;
+      }
+      .btn-2:hover{
+        background-color: rgb(26, 104, 248);
+      }
+      .btn-2{
+        opacity: 0;
+        cursor: pointer;
+        color: white;
+        border: none;
+        font-size: 20px;
+        border-radius: 30px;
+        background-color: rgb(87, 141, 240);
+        padding: 15px 60px;
+      }
+      .btn-3:hover{
+        background-color: rgb(26, 104, 248);
+      }
+      .btn-3{
+        cursor: pointer;
+        color: white;
+        border: none;
+        font-size: 20px;
+        border-radius: 30px;
+        background-color: rgb(87, 141, 240);
+        padding: 15px 60px;
+      }
+      .show_a:hover{
+        background-color: rgb(26, 104, 248);
+      }
+      .show_a{
+        width: 140px;
+        height: 140px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: white; 
+        font-size: 20px;
+        /* border: 20px solid orange; */
+        border: 3px solid black;
+        background-color: rgb(87, 141, 240);
+      }
+      /* #show_2{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: cornflowerblue;
+      }
+      #show_3{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: cornflowerblue;
+      }
+      #show_4{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: cornflowerblue;
+      }
+      #show_5{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: cornflowerblue;
+      } */
+
+  </style>
+
+
+</head>
+<body>
+
+
+
+      <button class="btn-3">START</button>
+      <div id="display">Let's Play the <span>GAME</span></div>
+      <button class="btn-1"></button>
+      
+      <div id="show">
+        <div class="show_1 show_a">html</div>          
+        <div class="show_2 show_a">course</div>          
+        <div class="show_3 show_a">full stack</div>          
+        <div class="show_4 show_a">website</div>          
+        <div class="show_5 show_a">javascript</div>          
+      </div>
+      
+      <button class="btn-2">End Game</button>
+
+
+
+
+
+      <script>
+
+
+          var start = document.getElementsByClassName("btn-3")[0]
+          var next = document.getElementsByClassName("btn-1")[0]
+          var btn_2 = document.getElementsByClassName("btn-2")[0]
+          var display = document.getElementById("display")
+          var show = document.getElementById("show")
+          var show_1 = document.getElementsByClassName("show_1")[0]
+          var show_2 = document.getElementsByClassName("show_2")[0]
+          var show_3 = document.getElementsByClassName("show_3")[0]
+          var show_4 = document.getElementsByClassName("show_4")[0]
+          var show_5 = document.getElementsByClassName("show_5")[0]
+          var show_a = document.getElementsByClassName("show_a")
+          console.log(show_1,show_2,show_3,show_4,show_5);
+        var arr = ["html","course","full stack","website","javascript"]
+        
+        
+        start.addEventListener("click", function(){
+          show.style.opacity = 1
+          next.innerHTML = "Find word"
+          btn_2.style.opacity = 1
+          next.style.opacity = 1
+          start.style.opacity = 0
+        })
+        var i;
+        next.addEventListener("click", function(){
+          i = Math.floor(Math.random() * arr.length)
+          next.innerHTML = "Next word"
+           display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+          })
+          show_1.addEventListener("click", function(){
+            if(show_1.innerHTML == arr[i]){
+              show_1.style.opacity = 0
+              // i++
+            display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+              // var bool =  true
+            }
+          })
+          show_2.addEventListener("click", function(){
+            if(show_2.innerHTML == arr[i]){
+              show_2.style.opacity = 0
+              // i++
+              display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+              // var bool = true
+            }
+          })
+          show_3.addEventListener("click", function(){
+            if(show_3.innerHTML == arr[i]){
+              show_3.style.opacity = 0
+              // i++
+            display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+              // var bool = true
+            }
+          })
+          show_4.addEventListener("click", function(){
+            if(show_4.innerHTML == arr[i]){
+              show_4.style.opacity = 0
+              // i++
+            display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+              // var bool = true
+            }
+          })
+          show_5.addEventListener("click", function(){
+            if(show_5.innerHTML == arr[i]){
+              show_5.style.opacity = 0
+              // i++
+            display.innerHTML = "Match The Current Word" + " " + "(" + arr[i] + ")"
+              // var bool = true
+            }
+          })
+          
+          var seconds
+          var date
+          
+          start.addEventListener("click", function(){
+            date = new Date();
+            seconds = date.getSeconds();
+            console.log(seconds);
+          })
+          btn_2.innerHTML = "End Game"
+          var second
+          btn_2.addEventListener("click", function(){
+            date = new Date();
+            second = date.getSeconds();
+            console.log(second);
+            display.innerHTML = "CONGRATULATION"
+            next.style.opacity = 0
+            var sec = second - seconds
+            if(sec < 0){
+              sec = sec + 60
+            alert("You Complete the Game in between" + " " + sec + " " + "seconds");
+            }
+            else{
+            alert("You Complete the Game in between" + " " + sec + " " + "seconds");
+            }
+          })
+          
+          
+
+          
+          
+
+
+      
+            
+      </script>
+
+
+  
+</body>
+</html>

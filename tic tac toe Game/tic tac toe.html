@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic tac toe</title>
+
+
+    <style>
+
+      *{
+        padding: 0;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body{
+        overflow: hidden;
+      }
+      .container{
+        width: 100%;
+        height: 100vh;
+        background-color: #333;
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+      }
+      .text{
+        width: max-content;
+        height: max-content;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .block_main{
+        width: 70vmin;
+        height: 70vmin;
+        /* background-color: violet; */
+        display: grid;
+        grid-template-columns: 33% 33% 33%;
+        grid-auto-rows: 33%;
+      }
+      .block{
+        width: 100%;
+        height: 100%;
+        /* background-color: turquoise; */
+        border: 1px solid;
+        font-size: 140px;
+        text-align: center;
+        vertical-align: center;
+        font-weight: bold;
+      }
+      
+      .box{
+        width: max-content;
+        height: max-content;
+        padding: 80px 120px;
+        background-color: white;
+        border-radius: 10px;
+        position: fixed;
+        z-index: 11111;
+        font-size: 40px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 10px 10px 80px 0 gray;
+        display: none;
+      }
+      .box::after{
+        content: "";
+        width: 1530px;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.651);
+        position: relative;
+        left: -100%;
+        top: -210%;
+        z-index: -11;
+      }
+
+      
+      </style>
+
+
+</head>
+<body>
+
+  
+<div class="box"></div>
+
+    <div class="container">
+        <div class="text">Tic Tac Toe</div>
+        <div class="block_main">
+          <div class="block" style="border-top: none;border-left: none;"></div>
+          <div class="block" style="border-top: none;"></div>
+          <div class="block" style="border-top: none;border-right: none;"></div>
+          <div class="block" style="border-left: none;"></div>
+          <div class="block"></div> 
+          <div class="block" style="border-right: none;"></div>
+          <div class="block" style="border-bottom: none;border-left: none;"></div>
+          <div class="block" style="border-bottom: none;"></div>
+          <div class="block" style="border-bottom: none;border-right: none;"></div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+
+          var block = document.querySelectorAll(".block");
+          var box = document.querySelector(".box");
+          let player1 = true
+          array = [
+            [0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],
+            [2, 4, 6]
+          ]          
+
+          block.forEach(function(e){
+            e.addEventListener("click", function(){
+
+              if(e.innerHTML)return;
+              if(player1){
+                  e.innerHTML = "X"
+                  player1 = false
+              }
+              // else{
+              //   player1 = true
+              // }
+              checkWinner();
+              if(player1 === false){
+                computerturn()
+              }
+            })
+          })
+
+          function computerturn () {
+
+                let random = Math.floor(Math.random() * block.length)
+                if(block[random].innerHTML !=""){
+                  computerturn()
+                }else{
+                  block[random].innerHTML = "O"
+                }
+                player1 = true
+          }
+
+
+          function checkWinner () {
+
+            let count = 0;
+            for(var i=0; i<array.length; i++){
+              
+              let first = array[i][0]
+              let second = array[i][1]
+              let third = array[i][2]
+              
+              if(block[first].innerHTML == "" && block[second].innerHTML == ""
+               && block[third].innerHTML == ""){
+                 console.log("empty");
+                }
+                else if(block[first].innerHTML == block[second].innerHTML && block[second].innerHTML == block[third].innerHTML){
+                  // console.log("winner");
+                  GameEnd(block[first]);
+                }
+                count++
+              }
+              
+              function GameEnd (e) {
+                box.style.display = "block";
+                if(e.innerHTML == "X"){
+                  box.innerHTML = `Player "X" is WON`;
+                }
+                if(e.innerHTML == "O"){
+                  box.innerHTML = `Player "O" is WON`;
+                }
+            }
+            
+
+
+              // if(block[0].innerHTML == block[1].innerHTML && block[1].innerHTML == block[2].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[3].innerHTML == block[4].innerHTML && block[4].innerHTML == block[5].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[6].innerHTML == block[7].innerHTML && block[7].innerHTML == block[8].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[0].innerHTML == block[3].innerHTML && block[3].innerHTML == block[6].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[1].innerHTML == block[4].innerHTML && block[4].innerHTML == block[7].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[2].innerHTML == block[5].innerHTML && block[5].innerHTML == block[8].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[0].innerHTML == block[4].innerHTML && block[4].innerHTML == block[8].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else if(block[2].innerHTML == block[4].innerHTML && block[4].innerHTML == block[6].innerHTML){
+              //   console.log("Winner");
+              // }
+              // else{
+              //    console.log("Draw");
+              // }
+            
+            
+            }
+
+          
+
+
+
+    </script>
+
+
+</body>
+</html>

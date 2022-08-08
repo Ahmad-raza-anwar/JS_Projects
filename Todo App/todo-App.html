@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>input Update</title>
+
+  <style>
+
+      body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        font-size: 33px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      #namee{
+        font-size: 25px;
+        margin-top: 5vh;
+        border: 1px solid white;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        width: 400px;
+        height: 40px;
+      }
+      #age{
+        font-size: 25px;
+        margin-top: 5vh;
+        border: 1px solid white;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        width: 400px;
+        height: 40px;
+      }
+      button{
+        font-size: 25px;
+        color: black;
+        background-color: white;
+        height: 40px;
+        width: 160px;
+        border: none;
+        cursor: pointer;
+        margin-top: 2vh;
+      }
+      
+
+
+
+  </style>
+
+
+</head>
+<body>
+
+
+      <label for="Task">Add Multipule Tasks</label>
+      <input id="namee" type="text" placeholder="   Enter your Name">
+      <input id="age" type="number" placeholder="   Enter Your Age">
+      
+  <div>
+      <input type="radio" id="Male" class="gender" name="Gender" value="Male">
+      <label for="Male">Male</label>
+   
+  </div>
+  <div id="main"></div>
+      
+      <button>Add Task</button>
+
+      
+
+
+      <script>
+
+
+            var namee = document.querySelector("#namee")
+            // console.log(namee);
+            var age = document.getElementById("age");
+            // console.log(age);
+            var btn = document.querySelector("button");
+            const gender = document.querySelector("#Male")
+            console.log(gender);
+
+          const main = document.querySelector("#main")
+        let count = 1
+            var obj = {
+              name: "",
+              age: "",
+              gender: "",
+              id: ``
+            }
+            var array = [];
+            
+            btn.addEventListener("click", add);
+
+            
+            function add() {
+              
+              obj.name = namee.value
+              obj.age = age.value
+              obj.gender=gender.value
+              obj.id=count
+              count++
+              
+              
+              array.push(obj);
+              console.log(array);
+              
+              // array.forEach((item,i)=>{
+                //     main.innerHTML += `${item.name}<br/>${item.age} <br/> ${item.gender} <br/>`
+                //   })
+                
+                var resp = array.map((item)=>{
+                  console.log();
+                      // return (
+                      //   `<div>${item.name}</div>`
+                      //  )
+                      })
+                      console.log(resp);
+                      main.innerHTML += resp
+                      
+
+                  }
+                  
+                  
+                
+
+
+
+
+
+      </script>
+
+
+
+  
+</body>
+</html>

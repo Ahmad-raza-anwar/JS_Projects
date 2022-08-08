@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Aman Maharshi">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+    <title>My Books</title>
+
+    <style>
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+@media (max-width: 770px) {
+    footer {
+        display: none;
+    }
+}
+@media (max-height: 700px) {
+    footer {
+        display: none;
+    }
+} 
+.alert-danger, .alert-success, .alert-warning {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    /* color: white; */
+    border-radius: 5px;
+    color: #333;
+}
+.alert-danger {
+    background: lightcoral;
+}
+.alert-success {
+    background: rgb(110, 207, 162);
+}
+.alert-warning {
+    background: rgb(218, 218, 127);
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center"><i class="fas fa-book-reader mr-4 text-success"></i>My Books</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="book-form">
+                    <div class="form-group has-success">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" class="form-control">
+                        <div></div> <!-- Used By app.js -->
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" class="form-control">
+                        <div></div> <!-- Used By app.js -->
+                    </div>
+                    <div id="alert"></div>
+                    <input type="submit" value="Add Book" id="submitBtn" class="btn btn-primary btn-block">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-stripped mt-4">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="book-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer class="font-small text-muted">
+        <p class="text-center">Coded by <a href="webdevrs.pk" target="_blank">M Zohaib</a></p>
+    </footer>
+
+    <script>
+
+      //  VARIABLES
+let form = document.querySelector('#book-form'),
+    title = document.querySelector('#title'),
+    author = document.querySelector('#author'),
+    tableBody = document.querySelector('#book-list');
+
+let error = true; // initially both the fields are blank
+
+
+//  EVENT LISTENERS
+title.addEventListener('blur', validation);
+author.addEventListener('blur', validation);
+form.addEventListener('submit', addBookToList);
+tableBody.addEventListener('click', removeBook);
+tableBody.addEventListener('click', editBook);
+// tableBody.addEventListener('click', upBook);
+tableBody.addEventListener('click', downBook);
+document.addEventListener('DOMContentLoaded', init);
+
+
+//  FUNCTIONS
+function validation() {
+    if(this.value != '') {
+        this.className = 'form-control is-valid';
+        error = false;
+    }
+    else {
+        this.className = 'form-control is-invalid';
+        error = true;
+        this.nextElementSibling.className = 'invalid-feedback';
+        this.nextElementSibling.textContent = 'Field can\'t be left blank';
+    }
+}
+
+function addBookToList(e) {
+    e.preventDefault();
+    if (error == false) {
+        let bookName = title.value,
+            bookAuthor = author.value;
+        
+            let tr = document.createElement('tr');
+        tr.innerHTML = `
+        <td>${bookName}</td>
+        <td>${bookAuthor}</td>
+        <td><a href="#" class="btn btn-danger btn-sm">X</a></td>
+        <td><a href="#" class="btn edit btn-success btn-sm">edit</a></td>
+        <td><a href="#" class="btn up btn-success btn-sm">Up</a></td>
+        <td><a href="#" class="btn down btn-success btn-sm">Down</a></td>
+        `
+        tableBody.appendChild(tr);
+        
+        form.reset();
+        title.className = 'form-control';
+        author.className = 'form-control';
+        
+        addToLocalStorage(bookName, bookAuthor);
+    }
+}
+
+function downBook(e) {
+    if(e.target.innerHTML == "Down") {
+        
+        let Book_val = e.target.parentElement.parentElement.firstElementChild.textContent
+        let Author_val = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent
+
+        let pre_book_val = e.target.parentElement.parentElement.nextElementSibling.childNodes
+        let newBook = pre_book_val[1].textContent
+        let newAuthor = pre_book_val[3].textContent
+
+        e.target.parentElement.parentElement.firstElementChild.textContent = newBook
+        e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent = newAuthor
+        pre_book_val[1].textContent = Book_val
+        pre_book_val[3].textContent = Author_val
+
+
+    let data = JSON.parse(localStorage.getItem("books"));
+    // // console.log(e.target);
+        data.forEach(function(e, i){
+            if(e.book == Book_val && e.author == Author_val){
+                let arr_book = e.book
+                let arr_author = e.author
+
+                data[i + 1].book = arr_book
+                data[i + 1].author = arr_author
+
+                let arr_new_B = data[i].book
+                let arr_new_A = data[i].author
+
+                data[i + 1].book = arr_new_B
+                data[i + 1].book = arr_new_A
+            }
+            localStorage.setItem("books", JSON.stringify(data))
+            location.reload();
+        })
+
+
+    }
+}
+
+function removeBook(e) {
+    // console.log(e.target);
+    if(e.target.classList.contains('btn-danger')) {
+        // console.log(e.target.parentElement.parentElement.firstElementChild.textContent + "first")
+        // remvoe from Local Storage
+        removeBookFromLocalStorage(e.target.parentElement.parentElement.firstElementChild.textContent);
+        //remove from DOM
+        e.target.parentElement.parentElement.remove();   
+    }
+}
+function editBook(e) {
+    // console.log(e.target);
+    if(e.target.classList.contains('btn-success')) {
+        let bookTitle = e.target.parentElement.parentElement.firstElementChild.textContent
+        let authorN = e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent
+        if(e.target.innerHTML == "edit"){
+            title.value = bookTitle
+            author.value = authorN
+            e.target.innerHTML = "update"
+        }
+        else if(e.target.innerHTML == "update"){
+            title.classList.remove("is-valid")
+            author.classList.remove("is-valid")
+            let storage = JSON.parse(localStorage.getItem("books"))
+            console.log(storage);
+            storage.forEach(function(e){
+                    if(e.book == bookTitle && e.author == authorN){
+                        let Tvalue = title.value
+                        let Avalue = author.value
+                        e.book = Tvalue
+                        e.author = Avalue
+                    }
+                    localStorage.setItem("books", JSON.stringify(storage))
+                    location.reload()
+
+            })
+            // function update(i) {
+            // }
+            e.target.parentElement.parentElement.firstElementChild.textContent = title.value
+            e.target.parentElement.parentElement.firstElementChild.nextElementSibling.textContent = author.value
+            e.target.innerHTML = "edit"
+                form.reset();
+            
+        }
+        // remvoe from Local Storage
+        // removeBookFromLocalStorage(e.target.parentElement.parentElement.firstElementChild.textContent);
+        //remove from DOM
+    }
+}
+
+
+function removeBookFromLocalStorage(name) {
+    let books = JSON.parse(localStorage.getItem('books'));
+    books.forEach(function(book, index) {
+        if(book.book === name) {
+            books.splice(index, 1)
+        }
+    })
+    localStorage.setItem('books', JSON.stringify(books));
+}
+
+function getFromLocalStorage() {
+    if (localStorage.getItem('books') == null) {
+        localStorage.setItem('books', '[]');
+        return JSON.parse(localStorage.getItem('books'));
+    }
+    else {
+        return JSON.parse(localStorage.getItem('books'));
+    }
+}
+
+function addToLocalStorage(bookName, authorName) {
+    let obj = {
+        book: bookName,
+        author: authorName
+    }
+    let ls = getFromLocalStorage();
+    ls.push(obj);
+    localStorage.setItem('books', JSON.stringify(ls));   
+}
+
+function init() {
+    let books = getFromLocalStorage();
+    books.forEach(function(book) {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${book.book}</td>
+            <td>${book.author}</td>
+            <td><a href="#" class="btn btn-danger btn-sm">X</a></td>
+            <td><a href="#" class="btn edit btn-success btn-sm">edit</a></td>
+            <td><a href="#" class="btn up btn-success btn-sm">Up</a></td>
+            <td><a href="#" class="btn down btn-success btn-sm">Down</a></td>
+        `
+        tableBody.appendChild(tr);
+    })
+}
+
+    </script>
+</body>
+</html>

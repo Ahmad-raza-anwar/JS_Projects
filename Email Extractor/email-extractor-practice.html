@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Text</title>
+</head>
+<body>
+
+
+    <textarea name="copytext" id="" cols="50" rows="5">Hassan Fareed</textarea><br>
+    <button id="movebtn">Move text</button>
+    <button id="copybtn">Copy text</button><br>
+    <textarea name="movetext" id="" cols="50" rows="5"></textarea>
+    <div class="output"></div>
+
+
+
+    <script>
+
+        var copytxt = document.querySelector("textarea[name=copytext]")
+        var movetxt = document.querySelector("textarea[name=movetext]")
+        var movebtn = document.querySelector("#movebtn")
+        var copybtn = document.querySelector("#copybtn")
+        var output = document.querySelector(".output")
+
+        movebtn.addEventListener("click", movetext)
+        copybtn.addEventListener("click", copytext)
+        movetxt.addEventListener("click", select)
+        copytxt.addEventListener("click", select)
+        
+
+
+        function copytext () {
+          let temp = copytxt.value
+          copycontent(temp)
+        }
+        function copycontent (temp) {
+
+          var textarea = document.createElement("textarea");
+          textarea.value = temp
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+          output.innerHTML = `<h3>Copy Text is ${textarea.value}<h3>`
+
+        }
+        
+        function movetext () {
+          let temp = copytxt.value
+          movetxt.value = temp
+        }
+        
+        function select() {
+          this.select()
+        }
+
+
+    </script>
+  
+</body>
+</html>

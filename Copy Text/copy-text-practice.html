@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email extracter</title>
+</head>
+<body>
+
+
+  Past Text;<br>
+  <textarea name="paste-text" id="" cols="50" rows="10">
+    safas awdsa waz\d awd xa wqrd xaewd cx 1 asdd@gmail.com qwa sada wrfsa casd 2rasds hassangul@gmail.com xqwsd awedsa gggh@gmail.com
+  </textarea><br>
+  <button>Get Emails</button>
+  <span class="counter">0</span>Emails in text<br>
+  <textarea name="output" id="" cols="50" rows="10"></textarea>
+
+
+
+
+  <script>
+
+      var rawdata = document.querySelector("textarea[name=paste-text]");
+      var output = document.querySelector("textarea[name=output]");
+      let counter = document.querySelector(".counter");
+      let btn = document.querySelector("button");
+      console.log(btn);
+
+      btn.addEventListener("click", function(){
+        
+        let temp = rawdata.value;
+        let exp = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+        let emaildata = temp.match(exp);
+        let holder = []
+        for(var i=0; i<emaildata.length; i++){
+          if(holder.indexOf(emaildata[i]) == -1){
+            holder.push(emaildata[i])
+          }
+        }
+        let text = holder.join(";");
+        counter.innerHTML = "Emails found" + " " + emaildata.length + " ";
+        output.innerHTML = text
+      })
+      output.addEventListener("click", function() {
+        this.select();
+      })
+    
+      
+
+  </script>
+  
+</body>
+</html>

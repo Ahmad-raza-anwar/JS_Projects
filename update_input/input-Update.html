@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>input Update</title>
+
+  <style>
+
+      body{
+        font-family: 'Courier New', Courier, monospace;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        font-size: 33px;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      #text{
+        font-size: 25px;
+        margin-top: 5vh;
+        border: 1px solid white;
+        background-color: rgb(41, 40, 40);
+        color: white;
+        width: 400px;
+        height: 40px;
+      }
+      button{
+        font-size: 25px;
+        color: black;
+        background-color: white;
+        height: 40px;
+        width: 160px;
+        border: none;
+        cursor: pointer;
+        margin-top: 2vh;
+      }
+      .second{
+        font-size: 25px;
+        margin-top: 1vh;
+        border: none;
+        /* border: 1px solid white; */
+        background-color: rgb(41, 40, 40);
+        color: white;
+        /* width: 400px; */
+        width: max-content;
+        height: 40px;
+      }
+      #show{
+        height: max-content;
+        /* border: 2px solid red; */
+        width: 700px;
+        display: flex;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+      }
+      .btn_2{
+        font-size: 25px;
+        color: black;
+        background-color: white;
+        height: 30px;
+        width: 100px;
+        margin-left: 1vw;
+        border: none;
+        cursor: pointer;
+      }
+      .btn_3{
+        font-size: 25px;
+        color: black;
+        background-color: white;
+        height: 30px;
+        width: 100px;
+        margin-left: 1vw;
+        border: none;
+        cursor: pointer;
+      }
+      .div{
+        width: 800px;
+        display: flex;
+      }
+
+
+  </style>
+
+
+</head>
+<body>
+
+
+      <label for="Task">Add Multipule Tasks</label>
+      <input id="text" type="text" placeholder="   Enter Here" id="Task">
+      <button >Add Task</button>
+
+      <div id="show"></div>
+
+
+      <script>
+
+
+            var input = document.getElementById("text");
+            var message = document.getElementById("show");
+            var btn = document.querySelector("button");
+
+            console.log(btn);
+
+            btn.addEventListener("click", function(){
+
+              var div = document.createElement("div")
+              div.style.height = "max-content"
+              div.style.width = "max-content"
+              div.style.width = "max-content"
+              div.classList.add("div")
+              message.appendChild(div);
+
+
+              var second = document.createElement("input");
+              input.setAttribute("type", "text")
+              second.classList.add("second");
+              div.appendChild(second);
+              second.value = input.value
+
+              var btn_2 = document.createElement("button");
+              btn_2.innerHTML = "Update"
+              btn_2.classList.add("btn_2")
+              div.appendChild(btn_2)
+
+              var btn_3 = document.createElement("button");
+              btn_3.innerHTML = "Delete"
+              message.appendChild(btn_3);
+              btn_3.classList.add("btn_3")
+
+              btn_3.addEventListener("click", function(){
+                div.style.display = "none"
+                btn_3.style.display = "none"
+                
+              })
+
+              input.value = ""
+            })
+
+
+
+
+      </script>
+
+
+
+  
+</body>
+</html>

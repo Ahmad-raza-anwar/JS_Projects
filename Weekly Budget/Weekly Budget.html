@@ -1,0 +1,251 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Weekly Budget</title>
+
+
+          <style>
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+body {
+    font-family: Ubuntu, sans-serif;
+    min-height: 100vh;
+    padding: 3% 0;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+header {
+    margin-bottom: 1rem;
+}
+main {
+    padding-top: 2rem;
+}
+main > .container {
+    background-color: rgba(255,255,255,0.7);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 4px;
+    margin: 1em auto;
+}
+.list-group {
+    max-height: 30vh;
+    overflow: scroll;
+}
+h1 {
+    color: white;
+}
+h4 {
+    padding: 0.5em;
+}
+
+/*  STICKY FOOTER   */
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 1em;
+    color: rgb(117, 117, 117);
+    letter-spacing: 1px;
+}
+footer a {
+    color: rgb(59, 140, 172);
+}
+
+/*  COLOR CLASSES   */
+.bg-info {background-color: lightskyblue;}
+.bg-success {background-color: lightgreen;}
+.bg-warning {background-color: orange;}
+.bg-danger {background-color: lightcoral;}
+
+/*  FORMS AND MESSAGES  */
+#form-first {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #cecece;
+}
+#enter-budget,  #button-one {
+    height: 2em;
+    text-align: center;
+    font-size: 2rem;
+}
+#message-first, #message-second {
+    color: red;
+    font-size: 1.75rem;
+    margin-top: 5px;
+}
+
+/*  MEDIA QUERIES   */
+@media (max-width: 991px) {
+    footer {
+        display: none;
+    }
+}
+@media (max-height: 650px) {
+    footer {
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+    #enter-budget {
+        width: 400px;
+    }
+    #button-one {
+        margin-left: 1em;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1000px;
+    }
+}
+
+          </style>
+
+
+</head>
+<body>
+    <header>
+        <h1 class="text-center">My Weekly Budget</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="col-md-12">
+                <form id="form-first" class="form-inline">
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="enter-budget" placeholder="Enter a Weekly Budget Amount">
+                    </div>
+                    <button type="submit" class="btn btn-default" id="button-one">Enter</button>
+                </form> 
+                <div id="message-first"></div>
+            </div>  
+            <div class="col-md-6">
+                <h4>Add your daily expences: </h4>
+                <form id="form-second">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Ex: Groceries" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" class="form-control" id="amount" placeholder="Ex: 250" disabled>
+                    </div>
+                    <button type="submit" class="btn btn-default" id="add-btn" disabled>Add</button>
+                </form>
+                <div id="message-second"></div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <h4 class="bg-info">Budget: <span id="budget">0</span> ₹ </h4>
+                    <h4 class="bg-success">Left: <span id="left">0</span> ₹</h4>
+                </div>
+                <h4>My Expences: </h4>
+                <ul class="list-group" id="list">
+                    <!-- <li class="list-group-item">Transportation <span class="badge">80</span></li> -->
+                    <!-- <li class="list-group-item">Books <span class="badge">200</span></li> -->
+                </ul>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <script>
+
+const enterBudget = document.querySelector('#enter-budget'),
+    formFirst = document.querySelector('#form-first'),
+    expenceName = document.querySelector('#name'),
+    expenceAmount = document.querySelector('#amount'),
+    formSecond = document.querySelector('#form-second'),
+    myBudget = document.querySelector('#budget'),
+    amountLeft = document.querySelector('#left'),
+    expenceList = document.querySelector('#list');
+
+let budget;
+
+
+//  EVENT LISTENERS
+document.addEventListener('DOMContentLoaded', function() {
+    enterBudget.focus();
+})
+formFirst.addEventListener('submit', init);
+formSecond.addEventListener('submit', addExpence);
+
+
+//  FUNCTIONS
+function init(e) {
+    e.preventDefault();
+    budget = enterBudget.value;
+    if (budget !== '') {
+        enableForm();
+        expenceName.focus();
+        myBudget.textContent = budget;
+        amountLeft.textContent = budget;
+    }
+    else {
+        document.getElementById('message-first').textContent = 'This field cant\'t be left empty';
+        setTimeout(function() { 
+            document.getElementById('message-first').style.display = 'none';
+        }, 2000)
+    }
+}
+function enableForm() {
+    expenceName.disabled = false;
+    expenceAmount.disabled = false;
+    document.getElementById('add-btn').disabled = false;
+    // enterBudget.disabled = true;
+    // document.getElementById('button-one').disabled = true;
+    formFirst.parentElement.style.display = 'none';
+}
+function addExpence(e) {
+    e.preventDefault();
+    let name = expenceName.value,
+        amount = expenceAmount.value;
+    formSecond.reset();
+    expenceName.focus();
+    addToList(name, amount);
+    updateBudget(amount);
+}
+function addToList(item, value) {
+    if(item != '' && value != '') { 
+        let li = document.createElement('li');
+        let span = document.createElement('span');
+        li.className = 'list-group-item';
+        span.className = 'badge';
+        span.textContent = value;
+        li.textContent = item;
+        li.appendChild(span);
+        expenceList.appendChild(li);
+    }
+}
+function updateBudget(expence) {
+    let total = budget - expence;
+    budget = total;
+    amountLeft.textContent = budget;
+    checkBudget(budget);
+}
+function checkBudget(budget) {
+    let initialBudget = Number(myBudget.textContent);
+
+    if (budget <= 0.5 * initialBudget) {
+        amountLeft.parentElement.className = 'bg-warning';
+    }
+    if (budget <= 0.25 * initialBudget) {
+        amountLeft.parentElement.className = 'bg-danger';
+    }
+    if (budget <= 0) {
+        amountLeft.parentElement.className = 'bg-danger';
+        document.getElementById('message-second').textContent = 'You have used up your entire budget for the week!'
+    }
+}
+
+    </script>
+</body>
+</html>

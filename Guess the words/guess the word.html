@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the word</title>
+
+    <style>
+
+        .circle{
+          border: 1px solid black;
+          border-radius: 50%;
+          background-color: rgb(223, 222, 222);
+          padding: 6px 12px;
+          font-size: 20px;
+          margin-left: 4px;
+          cursor: pointer;
+        }
+        .a_z{
+          margin-top: 3vh;
+        }
+        button{
+          font-size: 25px;
+          padding: 5px 20px;
+          border-radius: 10px;
+          margin-top: 20px;
+        }
+        .message{
+          font-size: 25px;
+        }
+        .line{
+          margin-left: 5px;
+          font-size: 50px;
+        }
+        /* a{
+          padding: 20px;
+          background-color: gainsboro;
+        } */
+
+    </style>
+
+
+</head>
+<body>
+  
+      <div class="a_z"></div>
+      <div class="random"></div>
+      <div class="message">Let's Play the Game</div>
+      <button type="button"></button>
+   
+
+
+
+      <script>
+
+            var a_z = document.querySelector(".a_z");
+            var random = document.querySelector(".random")
+            var btn = document.querySelector("button")
+            var message = document.querySelector(".message")
+            var btn_2 = document.getElementsByClassName("button")
+
+   
+        
+            random.style.opacity = 0;
+            a_z.style.opacity = 0;
+
+            var alphabet = "abcdefghijklmnopqrstuvwxyz";
+            var arr = alphabet.split("");
+            console.log(arr);
+            btn.innerHTML = "Start"
+
+            
+            
+            btn.addEventListener("click", function(){
+              
+                    start = true;
+                  random.style.opacity = 1
+                  a_z.style.opacity = 1
+                  random.innerHTML = ""
+                  a_z.innerHTML = ""
+                  btn.innerHTML = "Next Word"
+                  message.innerHTML = "Find the word behind the dash"
+                  var wording = ["javascript", "html", "website"]
+                  var R_num = Math.floor(Math.random() * 3);
+                  var word = wording[R_num].split("");
+                  console.log(word);
+                  // if(counter = word.length){
+                  //   start = true
+                  // }
+                  
+                  var array = []
+                  for(var l=0; l<word.length; l++){
+                    var span_2 = document.createElement("span");
+                    span_2.classList.add("line");
+                    random.appendChild(span_2);
+                    span_2.innerHTML = "_";
+                    array.push(span_2)
+                  }
+                  console.log(array);
+                  var k = 0;
+                  for(var i=0; i<26; i++){
+                    var span = document.createElement("span");
+                      span.classList.add("circle");
+                      a_z.appendChild(span);
+                      span.innerHTML = arr[k];
+      
+                            var counter = 0;
+                      span.addEventListener("click", function(){
+                        this.style.opacity = 0.3;
+                        this.style.cursor = "not-allowed"
+                        var text = this.innerHTML;
+                        
+                        for(var o=0; o<word.length; o++){
+                          if(word[o] == text){
+                            array[o].innerHTML = text
+                            counter++
+                            console.log(counter);
+                            var left = word.length - counter
+                              // left.innerHTML.style.color = "blue"
+                            if(word.length > counter){
+                              message.innerHTML = "Only" + " " + left + " "  + "spelling left";
+                              message.style.color = "red"
+                            }
+                            else{
+                              message.innerHTML = ""
+                            }
+                          }
+                        }
+                      })
+                      k++;
+                    }
+                    // btn.addEventListener("click", function(){
+                    //   start = false;
+                    // })
+              })
+
+              // btn_2.addEventListener("click", function(){
+              //   start = false
+              // })
+              
+                
+
+             
+                
+                
+                
+      </script>
+
+
+
+
+</body>
+</html>

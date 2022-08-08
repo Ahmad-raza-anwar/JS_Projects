@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analog clock</title>
+
+  <style>
+      body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: rgb(122, 70, 70);
+      }
+      #clock{
+        width: 300px;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        border-radius: 50%;
+        background-position: center center; 
+        /* background-color: blue; */
+        background-image: url(./clock.jpg);
+      }
+      .base{
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+        border-radius: 50%;
+        position: absolute;
+        /* transform: rotate(45deg); */
+        background-color: black;
+      }
+      #sec{
+        width: 3px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: red;
+        position: absolute;
+        bottom: 0;
+      }
+      #min{
+        width: 4px;
+        height: 90px;
+        border-radius: 50%;
+        background-color: black;
+        position: absolute;
+        bottom: 0;
+      }
+      #hour{
+        width: 5px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: black;
+        position: absolute;
+        bottom: 0;
+      }
+  </style>
+
+
+</head>
+<body>
+
+
+
+  <div id="clock">
+    <div class="base" id="pin-hour"> <div id="hour"></div> </div>
+    <div class="base" id="pin-min"> <div id="min"></div> </div>
+    <div class="base" id="pin-sec"> <div id="sec"></div> </div>
+  </div>
+
+
+
+      <script>
+
+
+
+        var hour = document.getElementById("pin-hour")
+        var min = document.getElementById("pin-min")
+        var sec = document.getElementById("pin-sec")
+        
+        
+        
+        function activeclock(){
+          var date = new Date();
+          var g_hour = date.getHours();
+          var g_min = date.getMinutes();
+          var g_sec = date.getSeconds();
+
+          var ans_hour = 30*g_hour + g_min/2
+          var ans_min = 6 * g_min
+          var ans_sec = 6 * g_sec
+          
+              sec.style.transform =`rotate(${ans_sec}deg)`;
+              min.style.transform =`rotate(${ans_min}deg)`;
+              hour.style.transform =`rotate(${ans_hour}deg)`;
+
+              setInterval(function(){
+                activeclock()
+              }, 1000)
+            }
+            
+            activeclock()
+
+
+
+
+
+
+
+            
+
+
+
+
+
+      </script>
+
+
+
+
+</body>
+</html>

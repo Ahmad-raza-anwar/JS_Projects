@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <style>
+
+    textarea{
+      width: 400px;
+      height: 50px;
+    }
+    .red{
+      color: red;
+    }
+
+
+  </style>
+</head>
+<body>
+
+
+  <div>
+      <textarea name="" id="" cols="30" rows="10" class="txtLimits"></textarea>
+      <div class="output"></div>
+  </div>
+
+  <script>
+
+      const output = document.querySelector(".output")
+      const txt = document.querySelector("textarea")
+
+      txt.addEventListener("change" , textCounter);
+      txt.addEventListener("keyup" , textCounter);
+      txt.addEventListener("keydown" , textCounter);
+
+      // ["keyup","keydown","change"].forEach(function(e){
+      //   console.log(e);
+      //   txt.addEventListener(e, textCounter)
+      // })
+
+      const maxLength = 20;
+      const warnLength = 7;
+
+      function textCounter(e){
+        console.log(txt.value,"value");
+        console.log(e);
+        let count = txt.value.length
+        console.log(count);
+        
+        var value = txt.value
+        if(count > maxLength){
+            var subvalue = value.substring(0,maxLength)
+          // txt.value = txt.value.substring(0, maxLength);
+          txt.value = subvalue
+        }
+        if(count > warnLength){
+          output.classList.add("red")
+        }
+        else{
+          output.classList.remove("red");
+        }
+        output.innerHTML = (maxLength-count) + "characters Left";
+      }
+
+  </script>
+
+
+</body>
+</html>

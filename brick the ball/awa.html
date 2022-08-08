@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            background-color: lightseagreen;
+        }
+        .box{
+            width: 200px;
+            height: 40px;
+            background-color: red;
+            border-radius: 10px;
+            position: absolute;
+            left: 200px;
+            bottom: 100px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="box"></div>
+        <div class="fireme hide"></div>
+    </div>
+
+    
+
+
+    <script>
+
+        const myShip = document.querySelector(".box");
+        const fireme = document.querySelector(".fireme")
+        const container = document.querySelector(".container")
+        const containerDim = container.getBoundingClientRect();
+
+
+        let player = {
+            fire: false,
+            speed: 5,
+        }
+        let arr = {};
+        
+        document.addEventListener("keydown",(e) => {
+            let key = e.keyCode
+            console.log(key);   
+            console.log(key);
+            if(key === 37){
+                arr.left = true
+            }
+            else if(key === 39){
+                arr.right = true
+            }
+            else if(key === 32){
+                // addShoot();
+            }
+        })
+        document.addEventListener("keyup",(e) => {
+            let key = e.keyCode
+            if(key === 37){
+                arr.left = false
+            }
+            if(key === 39){
+                arr.right = false
+            }
+        })
+        
+        requestAnimationFrame(update);
+
+        function update() {
+                let tempPos = myShip.offsetLeft;
+                if (player.fire) {
+                    if (fireme.ypos > 0) {
+                        fireme.ypos -= 15;
+                        fireme.style.top = fireme.ypos + "px";
+                    }
+                    else {
+                        player.fire = false;
+                        fireme.classList.add("hide");
+                        fireme.ypos = containerDim.height + 100;
+                    }
+                }
+                if (arr.left && tempPos > containerDim.left) {
+                    tempPos -= player.speed;
+                }
+                if (arr.right && (tempPos + myShip.offsetWidth) < containerDim.right) {
+                    tempPos += player.speed;
+                }
+                myShip.style.left = tempPos + "px";
+                requestAnimationFrame(update);
+        }
+
+
+
+    </script>
+</body>
+</html>

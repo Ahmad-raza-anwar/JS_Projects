@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Project</title>
+
+
+    <style>
+
+      body{
+        display: flex;
+        flex-direction: column;
+      }
+      input{
+        margin-top: 2vh;
+        height: 50px;
+        width: 40%;
+        font-size: 20px;
+        border: 2px solid darkgoldenrod;
+      }
+      textarea{
+        margin-top: 2vh;
+        height: 150px;
+        font-size: 20px;
+        width: 40%;
+        border: 2px solid darkgoldenrod;
+      }
+      button{
+        width: 150px;
+        height: 50px;
+        font-size: 25px;
+        margin-top: 2vh;
+      }
+
+      div{
+        width: 400px;
+        height: 400px;
+        margin-top: -400px;
+        margin-left: 800px;
+        border: 3px solid darkgoldenrod;
+        /* display: block; */
+        font-size: 25px;
+        line-height: 30px;
+      }
+
+    </style>
+
+  
+</head>
+<body>
+
+
+
+      <input id="text" type="text" placeholder="  Name">
+      <input id="email" type="email" placeholder="  Email">
+      <input id="password" type="password" placeholder="  password">
+      <input id="number" type="number" placeholder="   Your Contect">
+      <textarea  placeholder="  Message">
+      </textarea>
+      <button id="btn_1">Submit</button>
+
+      <div></div>
+
+
+
+
+      <script>
+
+
+            // var input_T = document.getElementById("text")
+            // var input_E = document.getElementById("email")
+            // var input_P = document.getElementById("passward")
+            // var input_N = document.getElementById("number")
+           
+            var content = document.querySelectorAll("input")
+            var textarea = document.querySelector("textarea");
+          var div = document.querySelector("div")
+          var btn = document.getElementById("btn_1")
+
+            div.style.opacity = 0
+        btn.addEventListener("click", function(){
+
+         for(var i=0; i<content.length; i++){
+           if(content[i].value === ""){
+             alert("You Must Fill the Empty Field");
+            }
+            else{
+              div.innerHTML += content[i].value + "<br />";
+            }
+          }
+          
+          div.style.opacity = 1;
+        })
+        
+
+
+             
+
+
+
+
+      </script>
+
+
+  
+</body>
+</html>

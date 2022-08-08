@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blur on click</title>
+  <style>
+
+        *{
+          padding: 0;
+          margin: 0;
+          font-family: 'Courier New', Courier, monospace;
+        }
+        .container{
+          width: 100%;
+          height: 100vh;
+          background-position-y: -200px;
+          background-size: cover;
+          background-image: url(./laptop-bg.jfif);
+          display: flex;
+          filter: blur(8px);
+          justify-content: center;
+          align-items: center;
+        }
+        .form{
+          width: 400px;
+          height: 400px;
+          position: absolute;
+          top: 200px;
+          left: 35%;
+          /* filter: blur(0px); */
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 0 0 10px 0 gray;
+        }
+        .form h1{
+          margin-top: 10vh;
+          text-align: center;
+        }
+        .form input{
+          width: 90%;
+          height: 40px;
+          margin: 5vh 1vw;
+          border-radius: 5px;
+          border: 3px solid darkgoldenrod;
+          font-size: 25px;
+        }
+        .form button{
+          padding: 10px 40px;
+          font-size: 25px;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          margin: 10px 120px;
+          background-color: darkgoldenrod;
+        }
+
+
+
+  </style>
+
+
+</head>
+<body>
+
+
+      <div class="container">
+
+      </div>
+
+      <div class="form">
+
+        <h1>Enter Your Passward</h1>
+        <input type="password" placeholder="  Password">
+        <button>Submit</button>
+      </div>
+
+
+
+      <script>
+
+          var input = document.querySelector("input");
+          var main = document.querySelector(".container")
+          // let counter = "8px";
+
+          input.addEventListener("keyup", function(){
+            let value = input.value.length
+            // var count = 8 - value;
+            main.style.filter =  `blur(${8 - value}px)`
+          })
+            // console.log("hello");
+            // counter++
+            // var count = 8 - counter
+            // if(count > 0 || count <= 8){
+            //     main.style.filter =  `blur(${count}px)`
+            // }
+            // console.log(input.value.length);
+
+            // if(value !== counter){
+            // }
+            // else{
+            //   main.style.filter =  `blur(${value}px)`
+            // }
+
+
+
+
+      </script>
+  
+</body>
+</html>
